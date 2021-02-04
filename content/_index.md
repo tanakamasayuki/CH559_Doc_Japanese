@@ -1,7 +1,7 @@
 ---
-title: CH559_Doc_English
+title: CH559_Doc_Japanese
 type: docs
 BookToC: false
 ---
 
-# English Docs for CH559 Microcontroller.
+# CH559マイクロコントローラ日本語ドキュメント

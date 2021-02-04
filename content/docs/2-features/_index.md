@@ -1,46 +1,46 @@
 ---
-title: 2. Features
+title: 2. 特徴
 type: docs
 weight: 2
 BookToC: false
 ---
 
-# 8-bit enhanced USB microcontroller CH559
+# 8ビット拡張USBマイクロコントローラCH559
 
-## 2. Features
+## 2. 特徴
 
-+ Core: Enhanced E8051 core, compatible with MCS51 instruction set, 79% of instructions are single-byte single-cycle instructions, average command speed is 8~15 times faster than standard MCS51, special XRAM data fast copy instruction, double DPTR pointer.
++ Core: 強化されたE8051コア、MCS51命令セットとの互換性、命令の79%はシングルバイトシングルサイクル命令、平均命令速度は標準MCS51より8～15倍速い、特殊XRAMデータ高速コピー命令、ダブルDPTRポインタ。
 
-+ ROM: 64KB non-volatile memory Flash-ROM, support 100K erasing, can be used for program storage space; or can be divided into 60KB program storage area and 1KB data storage area and 3KB boot code BootLoader/ISP program area.
++ ROM: 64KB不揮発性フラッシュROMメモリ、100Kの消去サポート、プログラムの記憶領域に使用することができます; または60KBプログラム記憶領域および1KBデータ記憶領域および3KBブートコードBootLoader/ISPプログラム領域に分けることができます。
 
-+ RAM: 256 bytes internal iRAM, can be used for fast data temporary storage and stack; 6KB on-chip xRAM, can be used for large data temporary storage and DMA direct memory access; support for external expansion of 32KB external SRAM.
++ RAM: 256バイトの内部iRAMは、速いデータ一時的な貯蔵およびスタックに使用することができます; 6KBオンチップxRAMは、大きいデータの一時的な貯蔵およびDMAに使用することができます; 32KBの外部拡張SRAMをサポート。
 
-+ USB: Embedded USB controller and dual USB transceiver, support USB-Host host mode and USB-Device device mode, support USB 2.0 full speed 12Mbps or low speed 1.5Mbps, USB host mode can manage two simultaneously through dual port Root-HUB USB devices. Supports up to 64 bytes of data packets, built-in FIFO, and support for DMA.
++ USB: 組み込みUSBコントローラと2つのUSBトランシーバー、USBホストホストモードとUSBデバイスデバイスモードをサポート、USB 2.0フルスピード12Mbpsまたは低速1.5Mbpsをサポート、USBホストモードは、2つのポートRoot-HUBを経由してUSBデバイスを管理することができます。64バイトまでのデータパケット、内蔵FIFO、およびDMAのサポートをしています。
 
-+ Timer: 4 groups of timers, T0/T1/T2 are standard MCS51 timers; T2 is extended to support 2 signal captures; TMR3 has 8 levels of FIFOs, supports DMA, supports signal capture sampling and 16-bit PWM output.
++ Timer: 4グループのタイマ、T0/T1/T2は標準のMCS51タイマ。T2は2つのシグナルキャプチャをサポートするために拡張されています。TMR3は8レベルのFIFO、DMAをサポートし、シグナルキャプチャのサンプリングと16ビットPWM出力をサポートしています。
 
-+ PWM: 3 sets of PWM outputs, PWM1/PWM2 are 2 8-bit PWM outputs; TMR3 supports 16-bit PWM outputs.
++ PWM: PWM出力は3つ、PWM1/PWM2は8ビットのPWM出力、TMR3は16ビットのPWM出力をサポートしています。
 
-+ UART: 2 sets of asynchronous serial port, UART0 is standard MCS51 serial port; UART1 is compatible with 16C550, built-in 8-stage FIFO, supports Modem signal, supports RS485 half-duplex mode, supports preset local address for automatic matching in multi-machine communication.
++ UART: 2つの非同期シリアルポート。UART0は標準的なMCS51シリアルポートです。UART1は16C550互換。ビルドインの8段階のFIFOがあります。サポートモデム信号は、RS485半二重モードをサポートします。マルチマシン通信の自動マッチングのためローカルアドレスのプリセットをサポートします。
 
-+ SPI: 2 sets of SPI controllers with clock frequency up to half of the system's main frequency Fsys, supporting serial data input and output simplex multiplexing. SPI0 has built-in FIFO and supports Master/Slave master-slave mode; SPI1 only supports host mode.
++ SPI: 2つのSPIコントローラはシステムのメイン周波数Fsysの半分までのクロック周波数。シリアルデータの入力と出力の単信多重化をサポートします。SPI0はFIFOを内蔵しており、マスター/スレーブのマスタースレーブモードをサポートしています。
 
-+ ADC: 8-channel 10-bit or 11-bit A/D analog-to-digital converter with built-in 2-stage FIFO, support for DMA, support for up to 1MSPS sample rate, and support for two-channel automatic wheel test.
++ ADC: 8チャンネル10ビットまたは11ビットA/Dアナログデジタルコンバータが2ステージFIFOを内蔵しています。DMAのサポート、最大1MSPSサンプル・レートのサポート、2チャンネル自動ホイール・テストをサポート。
 
-+ LED-CTRL: LED screen control card data transmission interface, built-in 4-level FIFO, support DMA, support 1/2/4 data line interface, clock frequency up to half of the system frequency Fsys.
++ LED-CTRL: LEDスクリーン制御カードのデータ伝送インタフェース、4レベルFIFOを内蔵、DMAをサポート、1/2/4データラインインターフェースをサポート、システム周波数Fsysの半分までのクロック周波数をサポートします。
 
-+ XBUS: 8-bit parallel external bus, compatible with standard MCS51 bus, used to connect off-chip SRAM memory or other peripherals, support direct 15-bit address or ALE multiplexed lower 8-bit address, support 4 kinds of bus access speed.
++ XBUS: 8ビットパラレル外部バスは、標準的なMCS51バスと互換性があり、オフチップSRAMメモリまたは他のペリフェラルを接続するのに使用される、ダイレクト15ビットアドレスか、またはALE多重化下位8ビットアドレスをサポート、4種類のバスアクセス速度をサポート。
 
-+ GPIO: Supports up to 45 GPIO pins (including XI/XO and RST and USB signal pins), 3.3V voltage output, and supports 5V withstand voltage input except P1.0~P1.7, XI, XO, RST.
++ GPIO：最大45本のGPIOピン（XI/XO、RST、USB信号ピンを含む）をサポート、3.3V電圧出力、P1.0～P1.7、XI、XO、RSTを除き5V耐圧入力をサポートしています。
 
-+ Interrupt: Supports 14 sets of interrupt sources, including 6 sets of interrupts compatible with standard MCS51 (INT0, T0, INT1, T1, UART0, T2), and extended 8 sets of interrupts (SPI0, TMR3, USB, ADC, UART1, PWM1) , GPIO, WDOG), where the GPIO interrupt can be selected from 7 pins.
++ Interrupt: 14の割り込みソースをサポートしており、6つの標準MCS51に対応した割り込み(INT0, T0, INT1, T1, UART0, T2)と8つの拡張割り込み(SPI0, TMR3, USB, ADC, UART1, PWM1, GPIO, WDOG)を含むGPIOの割り込みは7ピンから選択可能です。
 
-+ Watch-Dog: 8-bit preset watchdog timer WDOG, support for timed interrupts.
++ Watch-Dog: 8ビットのプリセットウォッチドッグタイマ(WDOG)、時限割り込みをサポート。
 
-+ Reset: Supports 4 kinds of reset signal sources, built-in power-on reset, support software reset and watchdog overflow reset, optional external input input reset.
++ Reset: 4種類のリセット信号源をサポート。内蔵パワーオンリセット、ソフトウェアリセットおよびウォッチドッグのオーバーフローリセット、任意外部入力リセットをサポートします。
 
-+ Clock: Built-in 12MHz clock source, external crystal can be supported by multiplexed GPIO pin, built-in PLL is used to generate USB clock and system frequency Fsys of required frequency.
++ Clock: 12MHzのクロックを内蔵、GPIO端子を利用した外部水晶をサポート、内蔵PLLを使用してUSBクロックとシステム周波数Fsysを必要な周波数で生成します。
 
-+ Power: Built-in 5V to 3.3V low dropout voltage regulator with internal working voltage of 3.3V and support for external 3.3V or 5V power input. Support low-power sleep, support USB, UART0, UART1, SPI0 and some GPIO external wake-up.
++ Power: 5V電源入力から3.3Vの低ドロップアウト電圧レギュレータを内蔵。内部動作電圧は3.3Vで、3.3Vまたは5V電源入力をサポート。低消費電力スリープ、USB、UART0、UART1、SPI0および一部のGPIO外部ウェイクアップをサポート。
 
-+ The chip has a unique ID number built in, supporting ID numbers and verification.
++ チップには固有のID番号が内蔵されており、ID番号と照合をサポートします。

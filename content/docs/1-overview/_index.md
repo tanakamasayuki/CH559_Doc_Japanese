@@ -1,20 +1,20 @@
 ---
-title: 1. Overview
+title: 1. 概要
 type: docs
 weight: 1
 BookToC: false
 ---
 
-# 8-bit enhanced USB microcontroller CH559
+# 8ビット拡張USBマイクロコントローラCH559
 
-## 1. Overview
+## 1. 概要
 
-The CH559 chip is an enhanced E8051 core microcontroller compatible with the MCS51 instruction set. Its 79% of instructions are single-byte single-cycle instructions, and the average instruction speed is 8 to 15 times faster than the standard MCS51.
+CH559チップは、MCS51命令セットと互換性のあるE8051コア・マイクロコントローラを強化したものです。命令の79%がシングルバイト・シングルサイクル命令で、平均命令速度は標準のMCS51の8～15倍になります。
 
-The CH559 supports up to 56MHz system clock speed, built-in 64K program memory Flash-ROM and 256-byte internal iRAM and 6K bytes of on-chip xRAM. Some xRAMs support DMA direct memory access.
+CH559は、最大56MHzのシステムクロック速度、内蔵64KプログラムメモリFlash-ROM、256バイトの内蔵iRAM、6KバイトのオンチップxRAMをサポートしています。一部のxRAMはDMA(ダイレクト・メモリ・アクセス)をサポートしています。
 
-The CH559 has built-in ADC analog-to-digital conversion, four groups of timers and PWM, dual asynchronous serial port, dual SPI, and other functional modules, as well as a built-in dual-port Root-HUB that supports USB-Host host mode and USB-Device device mode.
+CH559は、ADC(アナログ-デジタル変換)、4グループのタイマーとPWM、2つの非同期シリアルポート、2つのSPIなどの機能モジュールを内蔵しているほか、USBホストホストモードとUSB-Deviceデバイスモードをサポートする2ポートのRoot-HUBを内蔵しています。
 
-The following is an internal block diagram of the CH559 for reference only.
+以下に、参考までにCH559の内部ブロック図を示します。
 
 ![Block_Diagram](/docs/1-Overview/images/block_diagram.png "Block Diagram")
