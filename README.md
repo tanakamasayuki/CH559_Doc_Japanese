@@ -25,7 +25,7 @@ git clone https://github.com/tanakamasayuki/CH559_Doc_Japanese.git
 Install submodules:
 
 ```
-cd CH559_Doc_English
+cd CH559_Doc_Japanese
 git submodule init
 git submodule update
 ```
