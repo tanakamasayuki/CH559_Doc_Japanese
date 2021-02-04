@@ -9,7 +9,7 @@ BookToC: false
 
 ## 3. Package
 
-![CH559_Package](/docs/3-Package/images/package.png "CH559 Package")
+![CH559_Package](/docs/3-package/images/package.png "CH559 Package")
 
 ### Package Description
 | Package | Package width | Pin spacing | Package description | Part No. |

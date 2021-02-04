@@ -12,7 +12,7 @@ BookToC: false
     <p align="center">Figure 8.1.1 Clock system and structure</p>
 </div>
 
-![Clock_diagram](/docs/8-System_clock/images/sys_clk_diagram.png "Clock Diagram")
+![Clock_diagram](/docs/8-system_clock/images/sys_clk_diagram.png "Clock Diagram")
 
 The internal clock or external clock is selected as the original clock Fosc, and then the PLL is multiplied to generate the Fpll high-frequency clock. Finally, two sets of frequency converters are used to obtain the system clock Fsys and the clock of the USB module Fusb4x.
 

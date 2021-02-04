@@ -15,7 +15,7 @@ CH559 addressing space is divided into program storage space, internal data stor
     <p align="center">Figure 6.1 Memory Structure</p>
 </div>
 
-![Memory_structure](/docs/6-Memory_Structure/images/mem_struct.png "Memory structure")
+![Memory_structure](/docs/6-memory_structure/images/mem_struct.png "Memory structure")
 
 ## 6.2 Program Storage Space
 

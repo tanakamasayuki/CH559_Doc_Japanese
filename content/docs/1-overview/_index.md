@@ -17,4 +17,4 @@ CH559は、ADC(アナログ-デジタル変換)、4グループのタイマー�
 
 以下に、参考までにCH559の内部ブロック図を示します。
 
-![Block_Diagram](/docs/1-Overview/images/block_diagram.png "Block Diagram")
+![Block_Diagram](/docs/1-overview/images/block_diagram.png "Block Diagram")

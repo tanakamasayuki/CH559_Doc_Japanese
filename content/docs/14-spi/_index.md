@@ -193,7 +193,7 @@ The SPI master mode supports two transmission modes, Mode 0 and Mode 3. You can 
 
 Mode 0: bSn_MST_CLK = 0
 
-![spi_mode_0_tim](/docs/14-SPI/images/spi_mode_0_tim.png "SPI Mode 0 Timing Diagram")
+![spi_mode_0_tim](/docs/14-spi/images/spi_mode_0_tim.png "SPI Mode 0 Timing Diagram")
 
 <div>
     <p align="center">Figure 14.3.1 SPI Mode 0 Timing Diagram</p>
@@ -201,7 +201,7 @@ Mode 0: bSn_MST_CLK = 0
 
 Mode 3: bSn_MST_CLK = 1
 
-![spi_mode_3_tim](/docs/14-SPI/images/spi_mode_3_tim.png "SPI Mode 3 Timing Diagram")
+![spi_mode_3_tim](/docs/14-spi/images/spi_mode_3_tim.png "SPI Mode 3 Timing Diagram")
 
 <div>
     <p align="center">Figure 14.3.2 SPI Mode 3 Timing Diagram</p>

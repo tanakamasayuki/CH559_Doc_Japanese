@@ -44,7 +44,7 @@ The CH559 contains all the registers of the 8051 standard SFR, and other device 
     <p align="center">Table 5.1 Special Function Register Table</p>
 </div>
 
-![SFR_Table](/docs/5-SFR/images/SFR_Table.png "SFR Table")
+![SFR_Table](/docs/5-sfr/images/SFR_Table.png "SFR Table")
 
 Remarks: (1), Text in red means it can be addressed by bit; (2), the following is the corresponding description of the color box.
 

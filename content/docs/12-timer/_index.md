@@ -448,7 +448,7 @@ In practical applications, it is recommended to allow the PWM pin output and set
 
 ### Mode 0: 13-bit timer/counter
 
-![Timer_Mode_0](/docs/12-Timer/images/tim_mod_0.png "Timer0/1 Mode 0")
+![Timer_Mode_0](/docs/12-timer/images/tim_mod_0.png "Timer0/1 Mode 0")
 
 <div>
     <p align="center">Figure 12.5.1.1 Timer0/1 Mode 0</p>
@@ -456,7 +456,7 @@ In practical applications, it is recommended to allow the PWM pin output and set
 
 ### Mode 1: 16-bit timer/counter
 
-![Timer_Mode_1](/docs/12-Timer/images/tim_mod_1.png "Timer0/1 Mode 1")
+![Timer_Mode_1](/docs/12-timer/images/tim_mod_1.png "Timer0/1 Mode 1")
 
 <div>
     <p align="center">Figure 12.5.1.2 Timer0/1 Mode 1</p>
@@ -464,7 +464,7 @@ In practical applications, it is recommended to allow the PWM pin output and set
 
 ### Mode 2: Automatic reload 8-bit timer/counter
 
-![Timer_Mode_2](/docs/12-Timer/images/tim_mod_2.png "Timer0/1 Mode 2")
+![Timer_Mode_2](/docs/12-timer/images/tim_mod_2.png "Timer0/1 Mode 2")
 
 <div>
     <p align="center">Figure 12.5.1.3 Timer0/1 Mode 2</p>
@@ -473,7 +473,7 @@ In practical applications, it is recommended to allow the PWM pin output and set
 
 ### Mode 3: Timer0 is decomposed into two independent 8-bit timers and counters, and the TR1 control bit of Timer1 is borrowed. Timer1 replaces the borrowed TR1 control bit by whether to start mode 3, Timer1 enters mode 3, and Timer1 stops running.
 
-![Timer_Mode_3](/docs/12-Timer/images/tim_mod_3.png "Timer0/1 Mode 3")
+![Timer_Mode_3](/docs/12-timer/images/tim_mod_3.png "Timer0/1 Mode 3")
 
 <div>
     <p align="center">Figure 12.5.1.4 Timer0 Mode 3</p>
@@ -492,7 +492,7 @@ Timer2 16-bit reload timer/counter mode:
 6. The current timer / counter status can be obtained by querying the TF2 or timer 2 interrupts.
 
 
-![Timer2_16bit](/docs/12-Timer/images/tim2_16bit.png "Timer2 16-bit")
+![Timer2_16bit](/docs/12-timer/images/tim2_16bit.png "Timer2 16-bit")
 
 <div>
     <p align="center">Figure 12.5.2.1 Timer2 16-bit reload timer/counter</p>
@@ -509,7 +509,7 @@ Timer2 serial port 0 baud rate generator mode:
 2. Set T2MOD to select the internal clock frequency of the timer. If bT2_CLK is 0, then the clock of Timer2 is Fsys / 4. If bT2_CLK is 1, then bTMR_CLK = 0 or 1 selects Fsys / 2 or Fsys as the clock.
 (3) Set RCAP2L and RCAP2H to the reload value after the timer overflows, set TR2 to 1, and start Timer2.
 
-![Timer2_baud_gen](/docs/12-Timer/images/tim2_uart0.png "Timer2 UART0 Baud Rate Generator")
+![Timer2_baud_gen](/docs/12-timer/images/tim2_uart0.png "Timer2 UART0 Baud Rate Generator")
 
 <div>
     <p align="center">Figure 12.5.2.2 Timer2 UART0 Baud Rate Generator</p>
@@ -526,7 +526,7 @@ Timer2 dual channel capture mode:
 7. When the CAP2 capture is completed, RCAP2L and RCAP2H will save the current TL2 and TH2 count values ​​and set EXF2 to generate an interrupt.The next captured RCAP2L and RCAP2H i.l be between the last captured RCAP2L and RCAP2H The difference is the signal width between the two valid edges.
 8. If bit C_T2 in T2CON is 0 and bit bT2_CAP1_EN in T2MOD is 1, then the capture function of Timer2 on the T2 pin will be enabled at the same time. When CAP1 capture is completed, T2CAP1L and T2CAP1H will save the current TL2 and TH2 And the CAP1F bit is set to generate an interrupt.
 
-![tim2_capture_mode](/docs/12-Timer/images/tim2_capture_mode.png "Timer2 capture mode")
+![tim2_capture_mode](/docs/12-timer/images/tim2_capture_mode.png "Timer2 capture mode")
 
 <div>
     <p align="center">Figure 12.5.2.3 Timer2 capture mode</p>
@@ -540,7 +540,7 @@ Timer2 dual channel capture mode:
 4. Set each control bit in T3_CTRL, select the mode, and clear bT3_CLR_ALL, set bT3_CNT_EN to start Timer3.
 5. Set T3_DMA_AL and T3_DMA_AH and T3_DMA_CN as required, set bT3_DMA_EN to enable the DMA function.
 
-![tim3_16bit_tpc](/docs/12-Timer/images/tim3_16bit_tpc.png "Timer3 16-bit timer/PWM/capture")
+![tim3_16bit_tpc](/docs/12-timer/images/tim3_16bit_tpc.png "Timer3 16-bit timer/PWM/capture")
 
 <div>
     <p align="center">Figure 12.5.3.1 Timer3 16-bit timer/PWM/capture</p>

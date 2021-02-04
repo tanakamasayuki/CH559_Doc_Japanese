@@ -122,7 +122,7 @@ Figure 10.2.1 is the equivalent schematic of the P1.x pin of the P1 port. After 
     <p align="center">Figure 10.2.1 I/O pin equivalent schematic</p>
 </div>
 
-![GPIO_schematic](/docs/10-GPIO/images/GPIO_schematic.png "GPIO schematic")
+![GPIO_schematic](/docs/10-gpio/images/GPIO_schematic.png "GPIO schematic")
 
 ### P1 port input enable register (P1_IE):
 
