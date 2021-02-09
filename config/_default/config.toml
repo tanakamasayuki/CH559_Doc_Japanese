@@ -1,5 +1,5 @@
-languageCode = "en-us"
-title = "CH559 Doc English"
+languageCode = "ja-jp"
+title = "CH559日本語資料"
 theme = "book"
 
 # Needed for mermaid/katex shortcodes
