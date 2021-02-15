@@ -146,7 +146,7 @@ CH559には、8051標準SFRの全レジスタが格納されています。そ�
     <tr><td>RCAP2</td><td>CAh</td><td>RCAP2LとRCAP2Hで16ビットSFR</td><td>0000h</td></tr>
     <tr><td>T2MOD</td><td>C9h</td><td>Timer2モードレジスタ</td><td>0000 0000b</td></tr>
     <tr><td>T2CON</td><td>C8h</td><td>Timer2制御レジスタ</td><td>0000 0000b</td></tr>
-    <tr><td rowspan="19">Timer/counter3レジスタ</td><td>T3_FIFO_H</td><td>AFh</td><td>Timer3 FIFO上位バイト</td><td>xxxx xxxxb</td></tr>
+    <tr><td rowspan="19">Timer/Counter3レジスタ</td><td>T3_FIFO_H</td><td>AFh</td><td>Timer3 FIFO上位バイト</td><td>xxxx xxxxb</td></tr>
     <tr><td>T3_FIFO_L</td><td>AEh</td><td>Timer3 FIFO下位バイト</td><td>xxxx xxxxb</td></tr>
     <tr><td>T3_FIFO</td><td>AEh</td><td>T3_FIFO_LとT3_FIFO_Hで16ビットSFR</td><td>xxxxh</td></tr>
     <tr><td>T3_DMA_AH</td><td>ADh</td><td>DMAカレントバッファアドレス上位バイト</td><td>0000 xxxxb</td></tr>
