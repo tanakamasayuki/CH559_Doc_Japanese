@@ -39,7 +39,6 @@ xSFRは、外部データ記憶空間のxdataタイプの2440h～298Fhのアド�
 
 部分アドレスは、複数の独立したxSFRに対応しています。例えば、LED_DATA/LED_FIFO_CN。
 
-The CH559 contains all the registers of the 8051 standard SFR, and other device control registers have been added. The specific SFR is shown in the table below.
 CH559には、8051標準SFRの全レジスタが格納されています。そして、デバイス制御レジスタが追加されました。具体的なSFRは以下の表に示します。
 <div>
     <p align="center">表 5.1 特殊機能レジスタ表</p>
