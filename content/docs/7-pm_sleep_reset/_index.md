@@ -1,147 +1,146 @@
 ---
-title: 7. Power management
+title: 7. パワーマネージメント
 type: docs
 weight: 7
 BookToC: false
 ---
 
-# 7. Power management, sleep and reset
+# 7. パワーマネージメント、スリープとリセット
 
-## 7.1 External power input
+## 7.1 外部電源入力
 
-The CH559 chip has an internal working voltage of 3.3V, and the input/output voltage of the I/O pin is 3.3V. The I/O pins except P1.0~P1.7, XI, XO, and RST can withstand 5V voltage input. The CH559 chip has a 5V to 3.3V low dropout voltage regulator that supports an external 3.3V or 5V supply voltage input. The two supply voltage input modes refer to the table below.
+CH559チップの内部動作電圧は3.3Vで、I/O端子の入出力電圧は3.3Vです。P1.0～P1.7、XI、XO、RSTを除くI/O端子は5Vの電圧入力に耐えることができます。CH559チップには5Vから3.3Vの低ドロップアウト電圧レギュレータが搭載されており、外部からの3.3Vまたは5Vの電源電圧入力に対応しています。2つの電源電圧入力モードは下表を参照してください。
 
 <table>
     <tr>
-        <th>External supply voltage</th><th>VIN5 pin voltage: external voltage 3.3V~5V</th><th>VDD33 pin voltage: internal voltage 3.3V</th>
+        <th>外部電源電圧</th><th>VIN5ピン電圧: 外部電圧3.3V～5V</th><th>VDD33ピン電圧：内部電圧3.3V</th>
     </tr>
-    <tr><td>3.3V includes less than 3.6V</td><td>Input external 3.3V voltage to voltage regulator, must be grounded to not less than 0.1uF decoupling capacitor</td><td>Input external 3.3V as internal working power supply, must be grounded to ground not less than 0.1uF decoupling capacitor</td></tr>
-    <tr><td>5V includes greater than 3.6V</td><td>Input external 5V voltage to voltage regulator, must be grounded to not less than 0.1uF decoupling capacitor</td><td>Internal voltage regulator 3.3V output and 3.3V internal working power input, must be grounded to not less than 3.3uF decoupling capacitor</td></tr>
+    <tr><td>3.3V(3.6V以下)</td><td>電圧レギュレータへの入力外部3.3V電圧は、0.1uF以上のデカップリングコンデンサを接続する必要があります</td><td>内部動作電源として外部3.3Vを入力し、0.1u以上のデカップリングコンデンサを接続する必要があります</td></tr>
+    <tr><td>5V(3.6V超)</td><td>入力外部5V電圧を電圧レギュレータに、0.1uF以上のデカップリングコンデンサを接続する必要があります</td><td>内部電圧レギュレータ3.3V出力と3.3V内部動作電源入力は、3.3uF以上のデカップリングコンデンサを接続する必要があります</td></tr>
 </table>
 
-After the power is turned on or the system is reset, the CH559 is running by default. When some function modules are not needed, the clocks of these modules can be turned off to reduce power consumption. When the CH559 does not need to run at all, the PD in the PCON can be set to sleep. In the sleep state, external wake-up can be selected via USB, UART0, UART1, SPI0 and some GPIOs.
+電源を入れるか、システムをリセットすると、CH559はデフォルトで動作しています。一部の機能モジュールが不要な場合は、これらのモジュールのクロックをオフにして、消費電力を削減することができます。CH559を動作させる必要がない場合は、PCONのPDをスリープ状態に設定することができます。スリープ状態では、USB、UART0、UART1、SPI0、一部のGPIOを介して外部ウェイクアップを選択することができます。
 
-## 7.2 Power and Sleep Control Registers
+## 7.2 電源およびスリープ制御レジスタ
 
 <div>
-    <p align="center">Table 7.2.1 List of Power and Sleep Control Registers</p>
+    <p align="center">表7.2.1 電源およびスリープ制御レジスタ一覧</p>
 </div>
 
 <table>
     <tr>
-        <th>Name</th><th>Address</th><th>Description</th><th>Reset value</th>
+        <th>名前</th><th>アドレス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>WDOG_COUNT</td><td>FFh</td><td>Watchdog Count Register</td><td>00h</td></tr>
-    <tr><td>RESET_KEEP</td><td>FEh</td><td>reset holding register</td><td>00h</td></tr>
-    <tr><td>WAKE_CTRL</td><td>EBh</td><td>Sleep Wake Control Register</td><td>00h</td></tr>
-    <tr><td>SLEEP_CTRL</td><td>EAh</td><td>Sleep control register</td><td>00h</td></tr>
-    <tr><td>PCON</td><td>87h</td><td>Power Control Register</td><td>10h</td></tr>   
+    <tr><td>WDOG_COUNT</td><td>FFh</td><td>ウォッチドッグカウントレジスタ</td><td>00h</td></tr>
+    <tr><td>RESET_KEEP</td><td>FEh</td><td>リセット保持レジスタ</td><td>00h</td></tr>
+    <tr><td>WAKE_CTRL</td><td>EBh</td><td>スリープウェイク制御レジスタ</td><td>00h</td></tr>
+    <tr><td>SLEEP_CTRL</td><td>EAh</td><td>スリープ制御レジスタ</td><td>00h</td></tr>
+    <tr><td>PCON</td><td>87h</td><td>電源制御レジスタ</td><td>10h</td></tr>   
 </table>
 
-### Watchdog Count Register (WDOG_COUNT):
+### ウォッチドッグカウントレジスタ(WDOG_COUNT):
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>WDOG_COUNT</td><td>RW</td><td>The current count of the watchdog is 0FFh. It overflows when it is 00h. When it overflows, it automatically sets the interrupt flag bWDOG_IF_TO to 1</td><td>00h</td></tr>
+    <tr><td>[7:0]</td><td>WDOG_COUNT</td><td>RW</td><td>ウォッチドッグの現在のカウントは 0FFh です。<br />00h になるとオーバーフローします。<br />オーバーフローすると自動的に割り込みフラグbWDOG_IF_TOを1に設定します。</td><td>00h</td></tr>
 </table>
 
-### Reset holding register (RESET_KEEP):
+### リセット保持レジスタ(RESET_KEEP):
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>RESET_KEEP</td><td>RW</td><td>Reset the holding register, the value can be modified manually, except for the power-on reset to clear it, any other reset does not affect the value</td><td>00h</td></tr>
+    <tr><td>[7:0]</td><td>RESET_KEEP</td><td>RW</td><td>保持レジスタをリセットし、値を手動で変更することができます。<br />パワーオンリセットを除いて、他のどのリセットも値に影響を与えません。</td><td>00h</td></tr>
 </table>
 
-### Sleep wake control register (WAKE_CTRL), which can be written only in safe mode:
+### スリープウェイク制御レジスタ(WAKE_CTRL), セーフモードでのみ書き込み可能:
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>bWAK_BY_USB</td><td>RW</td><td>USB event wake-up enable, this bit is 0, no wake-up is allowed</td><td>0</td></tr>
-    <tr><td>6</td><td>bWAK_RXD1_LO</td><td>RW</td><td>UART1 receives an input low wake-up enable. This bit is 0 to disable wake-up.<br>Select XA/XB differential input in iRS485 mode, select RXD1 or RXD1_ pin according to bIER_PIN_MOD1=1/0 in non-iRS485 mode</td><td>0</td></tr>
-    <tr><td>5</td><td>bWAK_P1_5_LO</td><td>RW</td><td>P1.5 low wake enable, 0 disable wakeup</td><td>0</td></tr>
-    <tr><td>4</td><td>bWAK_P1_4_LO</td><td>RW</td><td>P1.4 Low wake enable, 0 disable wakeup</td><td>0</td></tr>
-    <tr><td>3</td><td>bWAK_P0_3_LO</td><td>RW</td><td>P0.3 Low wake enable, 0 disable wakeup</td><td>0</td></tr>
-    <tr><td>2</td><td>bWAK_CAP3_LO</td><td>RW</td><td>Timer3 captures the input low wake enable, and 0 disables wakeup.<br>Select CAP3 or CAP3_ pin according to bTMR3_PIN_X=0/1</td><td>0</td></tr>
-    <tr><td>1</td><td>bWAK_P3_2E_3L</td><td>RW</td><td>P3.2 Edge change and P3.3 low wake enable, 0 disable wakeup</td><td>0</td></tr>
-    <tr><td>0</td><td>bWAK_RXD0_LO</td><td>RW</td><td>UART0 receives input low wake enable, 0 disables wakeup.<br>Select RXD0 or RXD0_ pin according to bUART0_PIN_X=0/1</td><td>0</td></tr>
+    <tr><td>7</td><td>bWAK_BY_USB</td><td>RW</td><td>USBイベントウェイクアップ有効。<br />0: ウェイクアップは許可されていません。</td><td>0</td></tr>
+    <tr><td>6</td><td>bWAK_RXD1_LO</td><td>RW</td><td>UART1のLOW入力受信ウェイクアップ。<br />0: ウェイクアップが無効になります。<br />iRS485モードではXA/XB差動入力を選択し、非iRS485モードではbIER_PIN_MOD1=1/0によりRXD1またはRXD1_端子を選択します。</td><td>0</td></tr>
+    <tr><td>5</td><td>bWAK_P1_5_LO</td><td>RW</td><td>P1.5のLOWウェイクアップ有効。<br />0: ウェイクアップは許可されていません。</td><td>0</td></tr>
+    <tr><td>4</td><td>bWAK_P1_4_LO</td><td>RW</td><td>P1.4のLOWウェイクアップ有効。<br />0: ウェイクアップは許可されていません。</td><td>0</td></tr>
+    <tr><td>3</td><td>bWAK_P0_3_LO</td><td>RW</td><td>P0.3のLOWウェイクアップ有効。<br />0: ウェイクアップは許可されていません。</td><td>0</td></tr>
+    <tr><td>2</td><td>bWAK_CAP3_LO</td><td>RW</td><td>Timer3のLOWウェイクアップキャプチャ有効。<br />0: ウェイクアップは許可されていません。<br />bTMR3_PIN_X=0/1に従ってCAP3またはCAP3_端子を選択してください。</td><td>0</td></tr>
+    <tr><td>1</td><td>bWAK_P3_2E_3L</td><td>RW</td><td>P3.2のエッジ変更とP3.3のLOWウェイクアップ有効。<br />0: ウェイクアップは許可されていません。</td><td>0</td></tr>
+    <tr><td>0</td><td>bWAK_RXD0_LO</td><td>RW</td><td>UART0のLOW入力受信ウェイクアップ。<br />0: ウェイクアップが無効になります。<br />bUART0_PIN_X=0/1でRXD0またはRXD0_端子を選択します。</td><td>0</td></tr>
 </table>
 
-### Sleep Control Register (SLEEP_CTRL), which can be written only in Safe Mode:
+### スリープ制御レジスタ(WAKE_CTRL), セーフモードでのみ書き込み可能:
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>bSLP_OFF_USB</td><td>RW</td><td>USB clock off control, this bit is 1 Off clock</td><td>0</td></tr>
-    <tr><td>6</td><td>bSLP_OFF_ADC</td><td>RW</td><td>ADC clock off control, this bit is 1 Off clock</td><td>0</td></tr>
-    <tr><td>5</td><td>bSLP_OFF_UART1</td><td>RW</td><td>UAR1 clock off control, this bit is 1 off clock</td><td>0</td></tr>
-    <tr><td>4</td><td>bSLP_OFF_P1S1</td><td>RW</td><td>PWM1 and SPI1 clock off control, this bit is 1 OFF clock</td><td>0</td></tr>
-    <tr><td>3</td><td>bSLP_OFF_SPI0</td><td>RW</td><td>SPI0 clock off control, this bit is 1 off clock</td><td>0</td></tr>
-    <tr><td>2</td><td>bSLP_OFF_TMR3</td><td>RW</td><td>Timer3 clock off control, this bit is 1 off clock</td><td>0</td></tr>
-    <tr><td>1</td><td>bSLP_OFF_LED</td><td>RW</td><td>LED-CTRL Clock off control, this bit is 1 Off clock</td><td>0</td></tr>
-    <tr><td>0</td><td>bSLP_OFF_XRAM</td><td>RW</td><td>xRAM clock off control, this bit is 1 off clock</td><td>0</td></tr>
+    <tr><td>7</td><td>bSLP_OFF_USB</td><td>RW</td><td>USBクロックオフ制御。<br />1: クロックオフ</td><td>0</td></tr>
+    <tr><td>6</td><td>bSLP_OFF_ADC</td><td>RW</td><td>ADCクロックオフ制御。<br />1: クロックオフ</td><td>0</td></tr>
+    <tr><td>5</td><td>bSLP_OFF_UART1</td><td>RW</td><td>UAR1クロックオフ制御。<br />1: クロックオフ</td><td>0</td></tr>
+    <tr><td>4</td><td>bSLP_OFF_P1S1</td><td>RW</td><td>PWM1/SPI1クロックオフ制御。<br />1: クロックオフ</td><td>0</td></tr>
+    <tr><td>3</td><td>bSLP_OFF_SPI0</td><td>RW</td><td>SPI0クロックオフ制御。<br />1: クロックオフ</td><td>0</td></tr>
+    <tr><td>2</td><td>bSLP_OFF_TMR3</td><td>RW</td><td>Timer3クロックオフ制御。<br />1: クロックオフ</td><td>0</td></tr>
+    <tr><td>1</td><td>bSLP_OFF_LED</td><td>RW</td><td>LED-CTRLクロックオフ制御。<br />1: クロックオフ</td><td>0</td></tr>
+    <tr><td>0</td><td>bSLP_OFF_XRAM</td><td>RW</td><td>xRAMクロックオフ制御。<br />1: クロックオフ</td><td>0</td></tr>
 </table>
 
-### Power Control Register (PCON):
+### 電源制御レジスタ(PCON):
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>SMOD</td><td>RW</td><td>When using Timer 1 to generate UART0 baud rate, select the communication baud rate of UART0 mode 1, 2, 3: 0-slow mode; 1-fast mode</td><td>0</td></tr>
-    <tr><td>6</td><td>reserved</td><td>RO</td><td>reserved</td><td>0</td></tr>
-    <tr><td>5</td><td>bRST_FLAG1</td><td>R0</td><td>chip last reset flag high</td><td>0</td></tr>
-    <tr><td>4</td><td>bRST_FLAG0</td><td>R0</td><td>chip last reset flag low</td><td>1</td></tr>
-    <tr><td>3</td><td>GF1</td><td>RW</td><td>universal flag 1: User can define it by itself, can be cleared or set by software.</td><td>0</td></tr>
-    <tr><td>2</td><td>GF0</td><td>RW</td><td>general flag 0: user can define it himself, can be cleared or set by software</td><td>0</td></tr>
-    <tr><td>1</td><td>PD</td><td>RW</td><td>sleep mode enable, set to sleep after 1 wake-up hardware automatically cleared</td><td>0</td></tr>
-    <tr><td>0</td><td>reserved</td><td>R0</td><td>reserved</td><td>0</td></tr>
-
+    <tr><td>7</td><td>SMOD</td><td>RW</td><td>Timer1を使用してUART0のボーレートを生成する場合は、UART0モード1、2、3の通信ボーレートを選択します。<br />0 :スローモード<br />1: 高速モード</td><td>0</td></tr>
+    <tr><td>6</td><td>reserved</td><td>RO</td><td>予約</td><td>0</td></tr>
+    <tr><td>5</td><td>bRST_FLAG1</td><td>R0</td><td>チップラストリセットフラグ上位</td><td>0</td></tr>
+    <tr><td>4</td><td>bRST_FLAG0</td><td>R0</td><td>チップラストリセットフラグ下位</td><td>1</td></tr>
+    <tr><td>3</td><td>GF1</td><td>RW</td><td>ユニバーサルフラグ<br />1: ユーザーは自身で定義することができます。ソフトウェアによって値の設定が可能です。</td><td>0</td></tr>
+    <tr><td>2</td><td>GF0</td><td>RW</td><td>グローバルフラグ<br />1: ユーザーは自身で定義することができます。ソフトウェアによって値の設定が可能です。</td><td>0</td></tr>
+    <tr><td>1</td><td>PD</td><td>RW</td><td>スリープモードを有効にします。<br />1: ウェイクアップハードウェアが自動的にクリアしたあとにスリーブします</td><td>0</td></tr>
+    <tr><td>0</td><td>reserved</td><td>R0</td><td>予約</td><td>0</td></tr>
 </table>
 
 <div>
-    <p align="center">Table 7.2.2 Description of the chip's last reset flag</p>
+    <p align="center">表7.2.2 チップラストリセットフラグの説明</p>
 </div>
 
 <table>
     <tr>
-        <th>bRST_FLAG1</th><th>bRST_FLAG0</th><th>Reset flag description</th>
+        <th>bRST_FLAG1</th><th>bRST_FLAG0</th><th>リセットフラグの概要</th>
     </tr>
-    <tr><td>0</td><td>0</td><td>Software reset, source: bSW_RESET=1 and (bBOOT_LOAD=0 or bWDOG_EN=1)</td></tr>
-    <tr><td>0</td><td>1</td><td>Power-on reset, source: VDD33 pin voltage is lower than detection level</td></tr>
-    <tr><td>1</td><td>0</td><td>Watchdog reset, source: bWDOG_EN=1 and watchdog timeout</td></tr>
-    <tr><td>1</td><td>1</td><td>External pin is manually reset, source: En_P5.7_RESET=1 and P5.7 input high</td></tr>
+    <tr><td>0</td><td>0</td><td>ソフトウェアリセット。<br />bSW_RESET=1で(bBOOT_LOAD=0またはbWDOG_EN=1)</td></tr>
+    <tr><td>0</td><td>1</td><td>パワーオンリセット。<br />VDD33端子電圧が検出レベル以下</td></tr>
+    <tr><td>1</td><td>0</td><td>ウォッチドッグリセット。<br />bWDOG_EN=1でウォッチドッグタイムアウト</td></tr>
+    <tr><td>1</td><td>1</td><td>外部端子により手動リセット。<br />En_P5.7_RESET=1でP5.7がHIGH</td></tr>
 </table>
 
-## 7.3 Reset Control
+## 7.3 リセット制御
 
-The CH559 has four reset sources: power-on reset, external reset, software reset, watchdog reset, and the latter three are hot resets.
+CH559のリセットソースは、パワーオンリセット、外部リセット、ソフトウェアリセット、ウォッチドッグリセットの4つで、後者の3つはホットリセットです。
 
-### 7.3.1 Power-on reset
+### 7.3.1 パワーオンリセット
 
-Power-on reset POR is generated by the on-chip voltage detection circuit. The POR circuit continuously monitors the supply voltage of the VDD33 pin. Below the detection level, Vpot generates a power-on reset, and the hardware automatically delays Tpor to maintain the reset state. After the delay expires, CH559 runs. Only the power-on reset causes the CH559 to reload the configuration information and clear RESET_KEEP. Other thermal resets do not affect.
+パワーオンリセットのPORは、内蔵の電圧検出回路により生成されます。この回路はVDD33端子の電源電圧を常時監視しています。検出レベル以下になるとVpotがパワーオンリセットを発生させ、ハードウェアが自動的にTporを遅延させてリセット状態を維持します。遅延時間が経過するとCH559が動作します。パワーオンリセットのみで、CH559は構成情報をリロードし、RESET_KEEPをクリアします。他のサーマルリセットは影響しません。
 
-### 7.3.2 External reset
+### 7.3.2 外部リセット
 
-An external reset is generated by a high level applied to the RST pin. The reset process is triggered when the configuration information En_P5.7_RESET is 1 and the high level on the RST pin lasts longer than Trst. When the external high level signal is cancelled, the hardware automatically delays Trdl to maintain the reset state. After the delay expires, CH559 starts from the 0 address.
+RST端子にハイレベルが印加されることで外部リセットが発生します。リセット処理は、コンフィギュレーション情報En_P5.7_RESETが1で、RSTピンのHIGHレベルがTrstより長く続くとトリガされます。外部ハイレベル信号がキャンセルされると、ハードウェアは自動的にTrdlを遅延させてリセット状態を維持します。遅延が切れた後、CH559は0アドレスからスタートします。
 
-### 7.3.3 Software Reset
+### 7.3.3 ソフトウェアリセット
 
-The CH559 supports an internal software reset to actively reset the CPU state and re-run without external intervention. Set bSW_RESET in the global configuration register GLOBAL_CFG to 1, software reset, and automatically delay Trdl to maintain the reset state. After the delay expires, CH559 starts from 0 address, and bSW_RESET bit is automatically cleared by hardware.
+CH559 は、外部からの介入なしに CPU の状態を積極的にリセットして再実行するための内部ソフトウェアリセットをサポートしています。グローバル・コンフィギュレーション・レジスタGLOBAL_CFGのbSW_RESETを1に設定すると、ソフトウェア・リセットを行い、自動的にTrdlを遅延させてリセット状態を維持します。遅延時間が経過すると、CH559は0アドレスからスタートし、ハードウェアによりbSW_RESETビットは自動的にクリアされます。
 
-When bSW_RESET is set, if bBOOT_LOAD=0 or bWDOG_EN=1, bRST_FLAG1/0 will be indicated as a software reset after reset; when bSW_RESET is set to 1, if bBOOT_LOAD=1 and bWDOG_EN=0, then bRST_FLAG1/0 will not generate new The reset flag, but keeps the previous reset flag unchanged.
+bSW_RESETが設定されている場合、bBOOT_LOAD=0またはbWDOG_EN=1の場合、bRST_FLAG1/0はリセット後のソフトウェアリセットを指示します。bSW_RESETが1に設定され、bBOOT_LOAD=1、bWDOG_EN=0の場合、bRST_FLAG1/0は新たなリセットフラグを生成せず、前回のリセットフラグを変更せずに保持します。
 
-For a chip with an ISP boot program, after the power-on reset, run the boot program, which resets the chip to the application state according to the software reset. This software reset only causes bBOOT_LOAD to be cleared, and does not affect the state of bRST_FLAG1/0. (Because bBOOT_LOAD=1 before reset), when switching to the application state, bRST_FLAG1/0 still indicates the power-on reset state.
+ISP ブートプログラムを搭載したチップの場合、パワーオンリセット後にブートプログラムを実行すると、ソフトウェアリセットに従ってチップがアプリケーション状態にリセットされます。このソフトウェアリセットは bBOOT_LOAD をクリアするだけで、bRST_FLAG1/0 の状態には影響しません。(リセット前はbBOOT_LOAD=1なので)アプリケーション状態に切り替わっても、bRST_FLAG1/0はパワーオンリセット状態を示します。
 
-### 7.3.4 Watchdog Reset
+### 7.3.4 ウォッチドッグリセット
 
-The watchdog reset is generated when the watchdog timer times out. The watchdog timer is an 8-bit counter that counts the clock frequency of the system's main frequency, Fsys/262144. When the 0FFh is turned to 00h, an overflow signal is generated.
+ウォッチドッグタイマーがタイムアウトすると、ウォッチドッグリセットが発生します。ウォッチドッグタイマーは、システムのメイン周波数であるFsys/262144のクロック周波数をカウントする8ビットカウンタです。0FFhが00hになるとオーバーフロー信号が発生します。
 
-The watchdog timer overflow signal will trigger the interrupt flag bWDOG_IF_TO to be 1, which is automatically cleared when the WDOG_COUNT is reloaded or when the corresponding interrupt service routine is entered.
+ウォッチドッグタイマオーバーフロー信号により割り込みフラグbWDOG_IF_TOが1になります。この値は、WDOG_COUNTがリロードされたとき、または対応する割り込みサービスルーチンが入力されたときに自動的にクリアされます。
 
-Different timing periods Twdc are achieved by writing different count initial values to WDOG_COUNT. At 12MHz, the watchdog timing period Twdc at 00h is about 5.9 seconds and about 2.8 seconds at 80h.
+異なるタイミング期間Twdcは、WDOG_COUNTに異なるカウント初期値を書き込むことで達成されます。12MHzでは、00hでのウォッチドッグタイミング期間Twdcは約5.9秒、80hでは約2.8秒です。
 
-If bWDOG_EN = 1 when the watchdog timer overflows, a watchdog reset is generated, and Trdl is automatically delayed to maintain the reset state. After the delay is over, CH559 starts from the 0 address.
+ウォッチドッグタイマがオーバーフローしたときにbWDOG_EN=1になると、ウォッチドッグリセットが発生し、リセット状態を維持するためにTrdlを自動的に遅延させる。遅延終了後、CH559は0アドレスからスタートします。
 
-To avoid being reset by the watchdog when bWDOG_EN=1, WDOG_COUNT must be reset in time to avoid overflow.
+bWDOG_EN=1の時にウォッチドッグからリセットされないように、WDOG_COUNTはオーバーフローを避けるために時間内にリセットする必要があります。
