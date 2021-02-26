@@ -1,97 +1,97 @@
 ---
-title: 8. System Clock
+title: 8. システムクロック
 type: docs
 weight: 8
 BookToC: false
 ---
 
-# 8. System Clock
+# 8. システムクロック
 
-## 8.1 Clock Block Diagram
+## 8.1 クロックブロック図
 <div>
-    <p align="center">Figure 8.1.1 Clock system and structure</p>
+    <p align="center">図8.1.1 クロックシステムと構造</p>
 </div>
 
 ![Clock_diagram](/docs/8-system_clock/images/sys_clk_diagram.png "Clock Diagram")
 
-The internal clock or external clock is selected as the original clock Fosc, and then the PLL is multiplied to generate the Fpll high-frequency clock. Finally, two sets of frequency converters are used to obtain the system clock Fsys and the clock of the USB module Fusb4x.
+元のクロックFoscとして内部クロックまたは外部クロックを選択し、PLLを乗算して高周波クロックFpllを生成します。最後に、システムクロックFsysとUSBモジュールFusb4xのクロックを得るために、2組の周波数変換器が使用されます。
 
-The system clock Fsys is provided to each module of the CH559 directly or after clock gating. Each module does not need to work at the same time. In order to reduce power consumption, the clock of modules that do not need to work can be disabled by setting the sleep control register.
+システムクロックFsysは、CH559の各モジュールに直接またはクロックゲーティング後に供給されます。各モジュールは同時に動作する必要はありません。消費電力を抑えるために、スリープ制御レジスタを設定することで、動作する必要のないモジュールのクロックを無効にすることができます。
 
-## 8.2 Register description
+## 8.2 レジスタ概要
 
 <div>
-    <p align="center">Table 8.2.1 Clock control register list</p>
+    <p align="center">表8.2.1 クロック制御レジスタ一覧</p>
 </div>
 
 <table>
     <tr>
-        <th>Name</th><th>Address</th><th>Description</th><th>Reset value</th>
+        <th>名前</th><th>アドレス</th><th>詳細</th><th>リセット値</th>
     </tr>
-    <tr><td>CLOCK_CFG</td><td>B3h</td><td>System clock configuration register</td><td>98h</td></tr>
-    <tr><td>PLL_CFG</td><td>B2h</td><td>PLL clock configuration register</td><td>D8h</td></tr>  
+    <tr><td>CLOCK_CFG</td><td>B3h</td><td>システムクロック構成レジスタ</td><td>98h</td></tr>
+    <tr><td>PLL_CFG</td><td>B2h</td><td>PLLクロック構成レジスタ</td><td>D8h</td></tr>
 </table>
 
-### System clock configuration register (CLOCK_CFG), writable only in safe mode:
+### システムクロック構成レジスタ(CLOCK_CFG), セーフモードでのみ書き込み可能:
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>bOSC_EN_INT</td><td>RW</td><td>Internal clock oscillator enable, this bit is 1 to enable the internal clock oscillator and select the internal clock; this bit is 0 to disable the internal clock oscillator and select an external crystal oscillator</td><td>1</td></tr>
-    <tr><td>6</td><td>bOSC_EN_XT</td><td>RW</td><td>External crystal oscillator is enabled. If this bit is 1, the P4.6 / P4.7 pins are used as XI / XO and the oscillator is enabled. An external quartz crystal or ceramic oscillator is required between XI and XO; this bit is 0. Off External oscillator</td><td>0</td></tr>
-    <tr><td>5</td><td>bWDOG_IF_TO</td><td>R0</td><td>Watchdog timer interrupt flag bit. When this bit is 1, it indicates that there is an interrupt, which is triggered by the timer overflow signal. When this bit is 0, it indicates that there is no interrupt. This bit is automatically cleared when the watchdog count register WDOG_COUNT is reloaded or after entering the corresponding interrupt service routine</td><td>0</td></tr>
-    <tr><td>[4:0]</td><td>MASK_SYS_CK_DIV</td><td>RW</td><td>System clock division factor, when the value is 00000b, it means 100000b</td><td>11000b</td></tr>
+    <tr><td>7</td><td>bOSC_EN_INT</td><td>RW</td><td>内部クロック発振器が有効<br />1: 内部クロック発振器を有効にし、内部クロックを選択します。<br />0: 内部クロック発振器を無効にして、外部水晶発振器を選択します。</td><td>1</td></tr>
+    <tr><td>6</td><td>bOSC_EN_XT</td><td>RW</td><td>外部水晶振動子が有効<br />1: P4.6/P4.7端子をXI/XOとして使用し、発振が有効になります。XI/XO間には水晶またはセラミックの外付け発振器が必要です。<br />0: 外部発振器が無効</td><td>0</td></tr>
+    <tr><td>5</td><td>bWDOG_IF_TO</td><td>R0</td><td>ウォッチドッグタイマ割り込みフラグビット<br />1: タイマオーバーフロー信号による割り込みが発生していることを示します。<br />0: 割り込みがないことを示します。<br />このビットは、ウォッチドッグ・カウント・レジスタ WDOG_COUNT がリロードされたとき、または対応する割込みサービス・ルーチンに入ると自動的にクリアされます。</td><td>0</td></tr>
+    <tr><td>[4:0]</td><td>MASK_SYS_CK_DIV</td><td>RW</td><td>システムクロック分周率。値が00000bの場合は100000bを意味します。	</td><td>11000b</td></tr>
 </table>
 
-### PLL clock configuration register (PLL_CFG), writable only in safe mode:
+### PLLクロック制御レジスタ(PLL_CFG), セーフモードでのみ書き込み可能:
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:5]</td><td>MASK_USB_4X_DIV</td><td>RW</td><td>USB clock division factor, when the value is 000b, it means 1000b</td><td>110b</td></tr>
-    <tr><td>[4:0]</td><td>MASK_PLL_MULT</td><td>RW</td><td>PLL reference clock multiplier</td><td>11000b</td></tr>
+    <tr><td>[7:5]</td><td>MASK_USB_4X_DIV</td><td>RW</td><td>USBクロックの分周率。値が000bの場合は1000bを意味します。</td><td>110b</td></tr>
+    <tr><td>[4:0]</td><td>MASK_PLL_MULT</td><td>RW</td><td>PLL基準クロック乗算器</td><td>11000b</td></tr>
     
 </table>
 
-## 8.3 Clock configuration
+## 8.3 クロック設定
 
-The CH559 chip uses the internal clock by default after power-on. The internal clock frequency is 12MHz. The internal clock or external crystal oscillator clock can be selected by CLOCK_CFG. If the external crystal oscillator is turned off, the XI and XO pins can be used as P4.6 and P4.7 ordinary I / O ports.
+CH559チップは電源投入後、デフォルトで内部クロックを使用します。内部クロック周波数は12MHzです。内部クロックと外部水晶発振器のクロックはCLOCK_CFGで選択できます。外部水晶発振器をオフにすると、XI端子とXO端子をP4.6、P4.7の通常のI/Oポートとして使用することができます。
 
-If an external crystal oscillator is used to provide the clock, then the crystal should be connected between the XI and XO pins, and the oscillating capacitor should be connected to the XI and XO pins respectively to GND; if the clock signal is input directly from the outside, Pin input, XO pin floating.
+クロックを外部から水晶発振器で供給する場合は、水晶をXI端子とXO端子の間に接続し、発振用コンデンサをXI端子とXO端子にそれぞれGNDに接続します。外部から直接クロック信号を入力する場合は、ピン入力、XO端子はフローティング。
 
-+ Original clock frequency Fosc = bOSC_EN_INT? 12MHz: Fxt
-+ PLL frequency Fpll = Fosc * (PLL_CFG & MASK_PLL_MULT)
-+ USB clock division factor Kusb = (PLL_CFG & MASK_USB_4X_DIV) >> 5
-+ USB clock frequency Fusb4x = Fpll / (Kusb? Kusb: 8)
-+ System clock division factor Ksys = CLOCK_CFG & MASK_SYS_CK_DIV
-+ System frequency Fsys = Fpll / (Ksys? Ksys: 32)
-+ After reset, Fosc = 12MHz, Fpll = 288MHz, Fusb4x = 48MHz, Fsys = 12MHz.
++ オリジナルクロック周波数 Fosc = bOSC_EN_INT? 12MHz: Fxt
++ PLL周波数 Fpll = Fosc * (PLL_CFG & MASK_PLL_MULT)
++ USBクロック分周率 Kusb = (PLL_CFG & MASK_USB_4X_DIV) >> 5
++ USBクロック周波数 Fusb4x = Fpll / (Kusb? Kusb: 8)
++ システムクロック分周率 Ksys = CLOCK_CFG & MASK_SYS_CK_DIV
++ システム周波数 Fsys = Fpll / (Ksys? Ksys: 32)
++ リセット直後, Fosc = 12MHz, Fpll = 288MHz, Fusb4x = 48MHz, Fsys = 12MHz.
 
-### To switch to an external crystal oscillator to provide the clock:
+### クロックを供給するために外部の水晶発振器に切り替える:
 
-1. Enter safe mode, step one SAFE_MOD = 55h; step two SAFE_MOD = AAh.
-2. Set "bOSC_EN_XT" in CLOCK_CFG by "bit-or" operation, other bits remain unchanged, enable crystal oscillator.
-3. Delay of several milliseconds, usually 5mS ~ 10mS, waiting for the crystal oscillator to work stably.
-4. Enter the safe mode again, step one SAFE_MOD = 55h; step two SAFE_MOD = AAh.
-5. Clear the bOSC_EN_INT in CLOCK_CFG to 0 with the "bit and" operation, the other bits remain unchanged, and switch to the external clock.
-6. Close the safe mode, and write any value to SAFE_MOD to terminate the safe mode in advance.
+1. セーフモードに入る、ステップ1 SAFE_MOD = 55h; ステップ2 SAFE_MOD = AAh
+2. bit-or操作でCLOCK_CFGのbOSC_EN_XTを設定する。その他のビットは変更しません。水晶発振器が有効
+3. 数ミリ秒の遅延、およそ 5mS～10mS, 水晶発振器が安定して動作するのを待ちます
+4. 再びセーフモードに入る、ステップ1 SAFE_MOD = 55h; ステップ2 SAFE_MOD = AAh
+5. CLOCK_CFGのbOSC_EN_INTをビットアンド演算で0にクリアする。他のビットは変更しません。外部クロックに切り替える
+6. セーフモードを出る。SAFE_MOD に任意の値を書き込み、セーフモードを終了させます
 
-### The steps to modify the system clock are as follows:
+### システムクロックを変更する手順は以下の通りです:
 
-1. Calculate the new values of PLL_CFG and CLOCK_CFG in advance to avoid the calculation process too long beyond the validity period of the safe mode.
-2. Enter the safe mode, step one SAFE_MOD = 55h; step two SAFE_MOD = AAh.
-3. Write new value to PLL_CFG.
-4. Write a new value to CLOCK_CFG.
-5. Close the safe mode, and write any value to SAFE_MOD to terminate the safe mode in advance.
+1. セーフモードの有効期間を超えて計算処理が長くなりすぎないようにPLL_CFG, CLOCK_CFGの値を事前に計算しておく
+2. セーフモードに入る, ステップ1 SAFE_MOD = 55h; ステップ2 SAFE_MOD = AAh
+3. 新しい値をPLL_CFGに書き込む
+4. 新しい値をCLOCK_CFGに書き込む
+5. セーフモードを出る, SAFE_MOD に任意の値を書き込み、セーフモードを終了させます
 
 
-### Remarks:
+### 備考:
 
-1. PLL frequency Fpll is recommended not to exceed the frequency range of 24MHz ~ 350MHz.
-2. Prioritize the use of a lower system clock frequency Fsys, thereby reducing system dynamic power consumption and widening the operating temperature range.
-3. If the USB module is used, Fusb4x must be adjusted to 48MHz.
-4. Switching the external crystal and modifying the main frequency of the system are two independent operations. If both are required at the same time, it is recommended to divide into two cases:
-    1. if the external crystal frequency does not exceed 13MHz, then switch to the external crystal first, and then modify the system main frequency.
-    2. If the external crystal frequency is greater than 13MHz, first reduce the PLL reference clock multiplication factor in the PLL_CFG register to avoid the PLL frequency Fpll overflow, then switch to the external crystal, and finally modify the system main frequency, or you can also modify the PLL_CFG At the same time modify the system clock.
+1. PLL周波数Fpllは24MHz～350MHzの周波数範囲を超えないことを推奨します
+2. 低いシステムクロック周波数のFsysを優先的に使用することで、システムの動的消費電力を削減し、動作温度範囲を広げることができます
+3. USBモジュールを使用する場合、Fusb4xは48MHzに調整する必要があります.
+4. 外部水晶の切り替えとシステムの主周波数の変更は、独立した2つの操作です。両方を同時に必要とする場合は、以下の2つのケースに分けることをお勧めします:
+    1. 外部水晶の周波数が13MHzを超えない場合は、まず外部水晶に切り替えてから、システムの主周波数を変更します
+    2. 外部水晶振動子の周波数が13MHz以上の場合。最初にPLL_CFGレジスタのPLL基準クロック逓倍係数を減らしてPLL周波数Fpllオーバーフローを回避する。その後、外部水晶に切り替えて、最後にシステムのメイン周波数を変更するか、またはPLL_CFGを変更することができます。同時に、システムクロックを変更します
