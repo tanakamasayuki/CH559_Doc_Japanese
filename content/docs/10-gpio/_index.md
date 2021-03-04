@@ -1,227 +1,225 @@
 ---
-title: 10. I/O Port
+title: 10. I/Oポート
 type: docs
 weight: 10
 BookToC: false
 ---
 
-# 10. I/O Port
+# 10. I/Oポート
 
-## 10.1 Introduction to GPIO
+## 10.1 GPIO概要
 
-CH559 provides up to 45 I / O pins, some pins have alternate functions. Among them, the input and output of ports P0 ~ P3 and the output of P4 can be bit-addressed.
+CH559は45のI/Oピンを提供しますが、いくつかのピンは代替機能を持っています。それらの中で、ポートP0～P3の入出力とP4の出力はビットt単位でアクセスすることができます。
 
-If the pin is not configured as an alternate function, the default is the general-purpose I/O pin state. When used as a general-purpose digital I/O, all I/O ports have a true “read-modify-write” function, which supports bit manipulation instructions such as SETB or CLR to independently change the direction of certain pins or port levels.
+ピンが代替機能として構成されていない場合、デフォルトは汎用I/Oピンの状態です。汎用デジタルI/Oとして使用する場合、すべてのI/Oポートは真のリードモディファイライト命令を持っています。SETBやCLRなどのビット操作命令をサポートし、特定のピンやポートレベルの方向を独立して変更することができます。
 
-## 10.2 GPIO Register
+## 10.2 GPIOレジスタ
 
-All registers and bits in this section are expressed in a common format: the lowercase "n" represents the serial number of the port (n = 0, 1, 2, 3), and the lowercase "x" represents the serial number of the bit (x = 0, 1, 2, 3, 4, 5, 6, 7).
+このセクションのすべてのレジスタとビットは、共通のフォーマットで表現されています。小文字の"n"はポートのシリアル番号(n = 0, 1, 2, 3)を表します。小文字の"x"はビットの通し番号(x = 0, 1, 2, 3, 4, 5, 6, 7)を表しています。
 
 <div>
-    <p align="center">Table 10.2.1 GPIO Register List</p>
+    <p align="center">表10.2.1 GPIOレジスタ一覧</p>
 </div>
 
 <table>
     <tr>
-        <th>Name</th><th>Address</th><th>Description</th><th>Reset value</th>
+        <th>名前</th><th>アドレス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>P0</td><td>80h</td><td>P0 port input and output register</td><td>FFh</td></tr>
-    <tr><td>P0_DIR</td><td>C4h</td><td>P0 port direction control register</td><td>00h</td></tr>
-    <tr><td>P0_PU</td><td>C5h</td><td>Port 0 pull-up enable register</td><td>00h/FFh</td></tr>
-    <tr><td>P1</td><td>90h</td><td>P1 port input and output register</td><td>FFh</td></tr>
-    <tr><td>P1_IE</td><td>B9h</td><td>P1 port input enable register</td><td>FFh</td></tr>
-    <tr><td>P1_DIR</td><td>BAh</td><td>P1 port direction control register</td><td>00h</td></tr>
-    <tr><td>P1_PU</td><td>BBh</td><td>P1 port pull-up enable register</td><td>FFh</td></tr>
-    <tr><td>P2</td><td>A0h</td><td>P2 port input and output register</td><td>FFh</td></tr>
-    <tr><td>P2_DIR</td><td>BCh</td><td>P2 port direction control register</td><td>00h</td></tr>
-    <tr><td>P2_PU</td><td>BDh</td><td>P2 port pull-up enable register</td><td>FFh</td></tr>
-    <tr><td>P3</td><td>B0h</td><td>P3 port input and output register</td><td>FFh</td></tr>
-    <tr><td>P3_DIR</td><td>BEh</td><td>P3 port direction control register</td><td>00h</td></tr>
-    <tr><td>P3_PU</td><td>BFh</td><td>P3 port pull-up enable register</td><td>FFh</td></tr>
-    <tr><td>P4_OUT</td><td>C0h</td><td>P4 port output register</td><td>00h</td></tr>
-    <tr><td>P4_IN</td><td>C1h</td><td>P4 port input register (read only)</td><td>FFh</td></tr>
-    <tr><td>P4_DIR</td><td>C2h</td><td>P4 port direction control register</td><td>00h</td></tr>
-    <tr><td>P4_PU</td><td>C3h</td><td>P4 port pull-up enable register</td><td>FFh</td></tr>
-    <tr><td>P4_CFG</td><td>C7h</td><td>P4 port configuration register</td><td>00h</td></tr>
-    <tr><td>P5_IN</td><td>C7h</td><td>P5 port input register (read only)</td><td>00h</td></tr>
-    <tr><td>PIN_FUNC</td><td>CEh</td><td>Pin Function Select Register</td><td>00h</td></tr>
-    <tr><td>PORT_CFG</td><td>C6h</td><td>Port Configuration Register</td><td>0Fh</td></tr>
-    <tr><td>XBUS_SPEED</td><td>FDh</td><td>Bus speed configuration register</td><td>FFh</td></tr>
-    <tr><td>XBUS_AUX</td><td>A2h</td><td>Bus auxiliary setting register</td><td>00h</td></tr>
+    <tr><td>P0</td><td>80h</td><td>P0ポート入出力レジスタ</td><td>FFh</td></tr>
+    <tr><td>P0_DIR</td><td>C4h</td><td>P0ポート方向制御レジスタ</td><td>00h</td></tr>
+    <tr><td>P0_PU</td><td>C5h</td><td>P0ポートプルアップイネーブルレジスタ</td><td>00h/FFh</td></tr>
+    <tr><td>P1</td><td>90h</td><td>P1ポート入出力レジスタ</td><td>FFh</td></tr>
+    <tr><td>P1_IE</td><td>B9h</td><td>P1ポート入力イネーブルレジスタ</td><td>FFh</td></tr>
+    <tr><td>P1_DIR</td><td>BAh</td><td>P1ポート方向制御レジスタ</td><td>00h</td></tr>
+    <tr><td>P1_PU</td><td>BBh</td><td>P1ポートプルアップイネーブルレジスタ</td><td>FFh</td></tr>
+    <tr><td>P2</td><td>A0h</td><td>P2ポート入出力レジスタ</td><td>FFh</td></tr>
+    <tr><td>P2_DIR</td><td>BCh</td><td>P2ポート方向制御レジスタ</td><td>00h</td></tr>
+    <tr><td>P2_PU</td><td>BDh</td><td>P2ポートプルアップイネーブルレジスタ</td><td>FFh</td></tr>
+    <tr><td>P3</td><td>B0h</td><td>P3ポート入出力レジスタ</td><td>FFh</td></tr>
+    <tr><td>P3_DIR</td><td>BEh</td><td>P3ポート方向制御レジスタ</td><td>00h</td></tr>
+    <tr><td>P3_PU</td><td>BFh</td><td>P3ポートプルアップイネーブルレジスタ</td><td>FFh</td></tr>
+    <tr><td>P4_OUT</td><td>C0h</td><td>P4ポート出力レジスタ</td><td>00h</td></tr>
+    <tr><td>P4_IN</td><td>C1h</td><td>P4ポート入力レジスタ(読み込み専用)</td><td>FFh</td></tr>
+    <tr><td>P4_DIR</td><td>C2h</td><td>P4ポート方向制御レジスタ</td><td>00h</td></tr>
+    <tr><td>P4_PU</td><td>C3h</td><td>P4ポートプルアップイネーブルレジスタ</td><td>FFh</td></tr>
+    <tr><td>P4_CFG</td><td>C7h</td><td>P4ポート制御レジスタ</td><td>00h</td></tr>
+    <tr><td>P5_IN</td><td>C7h</td><td>P5ポート入力レジスタ(読み込み専用)</td><td>00h</td></tr>
+    <tr><td>PIN_FUNC</td><td>CEh</td><td>ピン機能選択レジスタ</td><td>00h</td></tr>
+    <tr><td>PORT_CFG</td><td>C6h</td><td>ポート制御レジスタ</td><td>0Fh</td></tr>
+    <tr><td>XBUS_SPEED</td><td>FDh</td><td>バススピード制御レジスタ</td><td>FFh</td></tr>
+    <tr><td>XBUS_AUX</td><td>A2h</td><td>バス補助制御レジスタ</td><td>00h</td></tr>
 
 </table>
 
-### Port configuration register (PORT_CFG):
+### ポート制御レジスタ(PORT_CFG):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:4]</td><td>bPn_DRV</td><td>RW</td><td>Pn port output drive capability selection, this bit is 0 to select the drive current 5mA level. This bit is 1 for P0 / P2 / P3 to select the drive current 20mA level, and for P1 to select the drive current 10mA level</td><td>0000b</td></tr>
-    <tr><td>[3:0]</td><td>bPn_OC</td><td>RW</td><td>Pn port open-drain output enable, this bit is 0 to set the port as push-pull output. This bit is 1 to set the port to be open-drain output</td><td>1111b</td></tr>
+    <tr><td>[7:4]</td><td>bPn_DRV</td><td>RW</td><td>Pn ポート出力ドライブ能力選択<br />0: ドライブ電流5mAレベルを選択。<br />1: P0/P2/P3はドライブ電流20mAレベル、P1はドライブ電流10mAレベルを選択。</td><td>0000b</td></tr>
+    <tr><td>[3:0]</td><td>bPn_OC</td><td>RW</td><td>Pnポートオープンドレイン出力イネーブル<br />0: プッシュプル出力に設定。<br />1: オープンドレイン出力に設定。</td><td>1111b</td></tr>
     
 </table>
 
-### Pn port input and output register (Pn):
+### Pnポート入出力レジスタ(Pn):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>Pn.0~Pn.7</td><td>RW</td><td>Pn.x pin status input and data output bits, bit-addressable</td><td>FFh</td></tr>
-    
+    <tr><td>[7:0]</td><td>Pn.0~Pn.7</td><td>RW</td><td>Pn.xピンの入力およびデータ出力ステータスビットです。ビット単位でのアクセス可能</td><td>FFh</td></tr>
 </table>
 
-### Pn port direction control register (Pn_DIR):
+### Pnポート方向制御レジスタ(Pn_DIR):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>Pn_DIR</td><td>RW</td><td>Pn.x pin direction setting</td><td>00h</td></tr>
+    <tr><td>[7:0]</td><td>Pn_DIR</td><td>RW</td><td>Pn.xピン方向設定</td><td>00h</td></tr>
     
 </table>
 
-### P0 port pull-up enable register (P0_PU) and Pn port pull-up enable register (Pn_PU), where n = 1/2/3:
+### P0ポートプルアップイネーブルレジスタ(P0_PU)とPnポートプルアップイネーブルレジスタ(Pn_PU), n = 1/2/3:
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td rowspan="2">[7:0]</td><td rowspan="2">P0_PU</td><td rowspan="2">RW</td><td>P0.x pin pull-up resistor is enabled (when En_P0_Pullup = 0 is configured)</td><td>00h</td></tr>
-    <td>P0.x pin pull-up resistor is enabled (when En_P0_Pullup = 1 is configured)</td><td>FFh</td></tr>
-    <tr><td>[7:0]</td><td>Pn_PU</td><td>RW</td><td>Pn.x pin pull-up resistor is enabled, this bit is 0 to disable pull-up; this bit is 1 to enable pull-up</td><td>FFh</td></tr>
+    <tr><td rowspan="2">[7:0]</td><td rowspan="2">P0_PU</td><td rowspan="2">RW</td><td>P0.xピンプルアップ抵抗が有効になります(En_P0_Pullup = 0が構成されている場合)</td><td>00h</td></tr>
+    <td>P0.xピンプルアップ抵抗が有効になります(En_P0_Pullup = 1が構成されている場合)</td><td>FFh</td></tr>
+    <tr><td>[7:0]</td><td>Pn_PU</td><td>RW</td><td>Pn.xピンのプルアップ抵抗が有効になります。<br />0: プルアップを無効<br />1: プルアップを有効</td><td>FFh</td></tr>
     
 </table>
 
-The configuration of the Pn port is implemented by the combination of the bit bPn_OC in the PORT_CFG, the port direction control register Pn_DIR, and the port pull-up enable register Pn_PU, as follows.
+Pnポートの構成は、PORT_CFGのbPn_OC、ポート方向制御レジスタのPn_DIR、ポートプルアップイネーブルレジスタのPn_PUの組み合わせにより、以下のように実装されています。
 
 <div>
-    <p align="center">Table 10.2.2 Port configuration register combinations</p>
+    <p align="center">表10.2.2 ポート構成レジスタの組み合わせ</p>
 </div>
 
 <table>
     <tr>
-        <th>bPn_OC</th><th>Pn_DIR</th><th>Pn_PU</th><th>Description</th>
+        <th>bPn_OC</th><th>Pn_DIR</th><th>Pn_PU</th><th>概要</th>
     </tr>
-    <tr><td>0</td><td>0</td><td>0</td><td>High-impedance input mode, no pull-up resistor on pin</td></tr>
-    <tr><td>0</td><td>0</td><td>1</td><td>Pull-up input mode, pins have pull-up resistors</td></tr>
-    <tr><td>0</td><td>1</td><td>x</td><td>Push-pull output mode, with symmetrical driving ability, can output or absorb large current</td></tr>
-    <tr><td>1</td><td>0</td><td>0</td><td>High-impedance input weak quasi-bidirectional mode, open-drain output, no pull-up resistor on pin</td></tr>
-    <tr><td>1</td><td>1</td><td>0</td><td>High-impedance input quasi-bidirectional mode, open-drain output, no pull-up resistor on the pin, when the output changes from low to high, it automatically drives high for 2 clock cycles to speed up the conversion</td></tr>
-    <tr><td>1</td><td>0</td><td>1</td><td>Weak quasi-bidirectional mode (imitation of 8051), open-drain output, support input, pin with pull-up resistor</td></tr>
-    <tr><td>1</td><td>1</td><td>1</td><td>Quasi-bidirectional mode (standard 8051), open-drain output, support input, pins have pull-up resistors, when the output changes from low to high, it automatically drives high for 2 clock cycles to speed up the conversion</td></tr>
+    <tr><td>0</td><td>0</td><td>0</td><td>ハイインピーダンス入力モード、ピンにプルアップ抵抗なし</td></tr>
+    <tr><td>0</td><td>0</td><td>1</td><td>プルアップ入力モード、ピンはプルアップ抵抗付き</td></tr>
+    <tr><td>0</td><td>1</td><td>x</td><td>プッシュプル出力モードでは、対称駆動が可能なため、大電流を出力したり吸収したりすることができます</td></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>ハイインピーダンス入力弱擬似双方向モード、オープンドレイン出力、端子にプルアップ抵抗なし</td></tr>
+    <tr><td>1</td><td>1</td><td>0</td><td>ハイインピーダンス入力擬似双方向モード、オープンドレイン出力、ピン上のプルアップ抵抗なし、出力がLOWからHIGHに変化すると、自動的に2クロックサイクルでHIGHを駆動し、変換を高速化します</td></tr>
+    <tr><td>1</td><td>0</td><td>1</td><td>弱擬似双方向モード（8051の模倣）、オープンドレイン出力、サポート入力、プルアップ抵抗付きピン</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>準双方向モード（標準8051）、オープンドレイン出力、サポート入力、ピンは、出力がLOWからHIGHに変化するときにプルアップ抵抗を持っている、それは自動的に変換を高速化するために2クロックサイクルのためにHIGHを駆動します</td></tr>
     
 </table>
 
-Ports P0~P3 support pure input or push-pull output and quasi-bidirectional modes. Port P4 supports pure input or push-pull output and other modes. Each pin has a freely controllable internal pull-up resistor connected to VDD33, and a protection diode connected to GND.
+ポートP0～P3は、純粋な入力またはプッシュプル出力と準双方向モードをサポートしています。ポート P4 は純入力またはプッシュプル出力、その他のモードに対応しています。各端子には VDD33 に接続された自由に制御可能な内部プルアップ抵抗と GND に接続された保護ダイオードを内蔵しています。
 
-Figure 10.2.1 is the equivalent schematic of the P1.x pin of the P1 port. After removing P1_IE and AIN and ADC_CHANN, it can be applied to the P0, P2, and P3 ports.
+図10.2.1は、P1ポートのP1.x端子の等価回路図です。P1_IEとAIN、ADC_CHANNを除去した後、P0、P2、P3ポートに適用することができます。
 
 <div>
-    <p align="center">Figure 10.2.1 I/O pin equivalent schematic</p>
+    <p align="center">図10.2.1 I/Oピン等価回路図</p>
 </div>
 
 ![GPIO_schematic](/docs/10-gpio/images/GPIO_schematic.png "GPIO schematic")
 
-### P1 port input enable register (P1_IE):
+### P1ポート入力イネーブルレジスタ(P1_IE):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>P1_IE</td><td>RW</td><td>P1.x pin input enable, if this bit is 0, the pin is used for ADC analog input, digital input is disabled. If this bit is 1, the digital input is enabled</td><td>FFh</td></tr>
+    <tr><td>[7:0]</td><td>P1_IE</td><td>RW</td><td>P1.xピン入力イネーブル。<br />0: ADCに使用され、デジタル入力は無効<br />1: デジタル入力が有効</td><td>FFh</td></tr>
     
 </table>
 
-## 10.3 P4 port
+## 10.3 P4ポート
 
-### P4 port output register (P4_OUT):
+### P4ポート入力イネーブルレジスタ(P4_OUT):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>P4_OUT.0~P4_OUT.7</td><td>RW</td><td>P4.x pin data output bit, bit-addressable</td><td>00h</td></tr>
+    <tr><td>[7:0]</td><td>P4_OUT.0~P4_OUT.7</td><td>RW</td><td>P4.xピンデータ出力ビットです。ビット単位アクセス可能</td><td>00h</td></tr>
     
 </table>
 
-### P4 port input register (P4_IN):
+### P4ポート入力レジスタ(P4_IN):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>P4_IN</td><td>R0</td><td>P4.x pin status input bit</td><td>FFh</td></tr>
+    <tr><td>[7:0]</td><td>P4_IN</td><td>R0</td><td>P4.xピン入力ステータスビット</td><td>FFh</td></tr>
     
 </table>
 
-### P4 port pull-up enable register (P4_PU):
+### P4ポートプルアップイネーブルレジスタ(P4_PU):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>P4_PU</td><td>RW</td><td>P4.x pin pull-up resistor is enabled, this bit is 0 to disable pull-up; this bit is 1 to enable pull-up</td><td>FFh</td></tr>
+    <tr><td>[7:0]</td><td>P4_PU</td><td>RW</td><td>P4.xプルアップ抵抗が有効になっています。<br />0: プルアップを無効<br />1: プルアップを有効
+</td><td>FFh</td></tr>
     
 </table>
 
-### P4 port direction control register (P4_DIR):
+### P4ポート方向制御レジスタ(P4_DIR):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>[7:0]</td><td>P4_DIR</td><td>RW</td><td>P4.x pin direction setting, this bit is 0 for input; this bit is 1 for output</td><td>00h</td></tr>
+    <tr><td>[7:0]</td><td>P4_DIR</td><td>RW</td><td>P4.xのピン方向の設定<br />0: 入力<br />1: 出力</td><td>00h</td></tr>
     
 </table>
 
-### P4 port configuration register (P4_CFG) and P5 port input register (P5_IN):
+### P4ポート制御レジスタ(P4_CFG)とP5ポート入力レジスタ(P5_IN):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>P5.7</td><td>R0</td><td>P5.7 pin status input bit</td><td>0</td></tr>
-    <tr><td>6</td><td>bIO_INT_ACT</td><td>R0</td><td><p>GPIO interrupt request activation status:</p><p>When bIE_IO_EDGE = 0, this bit is 1 to indicate the GPIO input active level, interrupt will be requested, and 0 to indicate the input invalid level.</p><p>When bIE_IO_EDGE = 1, this bit is used as an edge interrupt flag. A value of 1 indicates that a valid edge was detected.This bit cannot be cleared by software. It can only be automatically cleared during reset or level interrupt mode or when entering the corresponding interrupt service routine zero</p></td><td>0</td></tr>
-    <tr><td>5</td><td>P5.5</td><td>R0</td><td>P5.5 pin status input bit with built-in controllable pull-down resistor</td><td>0</td></tr>
-    <tr><td>4</td><td>P5.4</td><td>R0</td><td>P5.4 pin status input bit with built-in controllable pull-down resistor</td><td>0</td></tr>
-    <tr><td>3</td><td>bSPI0_PIN_X</td><td>RW</td><td>SPI0 pin SCS / SCK mapping enable. If this bit is 0, P1.4 / P1.7 is used. If this bit is 1, P4.6 / P4.7 is used</td><td>0</td></tr>
-    <tr><td>2</td><td>bP4_DRV</td><td>RW</td><td>P4 port output drive capability selection, this bit is 0 to select the drive current 5mA level. This bit is 1 to select the drive current 20mA level</td><td>0</td></tr>
-    <tr><td>1</td><td>P5.1</td><td>R0</td><td>P5.1 pin status input bit with built-in controllable pull-down resistor</td><td>0</td></tr>
-    <tr><td>0</td><td>P5.0</td><td>R0</td><td>P5.0 pin status input bit with built-in controllable pull-down resistor</td><td>0</td></tr>
-    
+    <tr><td>7</td><td>P5.7</td><td>R0</td><td>P5.7ピン入力ステータスビット</td><td>0</td></tr>
+    <tr><td>6</td><td>bIO_INT_ACT</td><td>R0</td><td><p>GPIO割り込み要求の有効化状態です。<br /><br />bIE_IO_EDGE = 0の時、本ビットは1でGPIO入力アクティブレベルを示し、割り込み要求が行われ、0で入力無効レベルを示します。<br /><br />bIE_IO_EDGE = 1の場合、このビットはエッジ割り込みフラグとして使用されます。1の場合は有効なエッジが検出されたことを示します。<br />このビットはソフトウェアではクリアできません。リセットまたはレベル割り込みモードの時、または対応する割り込みサービス ルーチンゼロに入った時にのみ自動的にクリアされます。</p></td><td>0</td></tr>
+    <tr><td>5</td><td>P5.5</td><td>R0</td><td>P5.5ピン入力ステータスビットと制御可能な内蔵プルダウン抵抗</td><td>0</td></tr>
+    <tr><td>4</td><td>P5.4</td><td>R0</td><td>P5.4ピン入力ステータスビットと制御可能な内蔵プルダウン抵抗</td><td>0</td></tr>
+    <tr><td>3</td><td>bSPI0_PIN_X</td><td>RW</td><td>SPI0ピンSCS/SCKマッピングイネーブルです。<br />0: P1.4/P1.7が使用されます。<br />1: P4.6/P4.7が使用されます。</td><td>0</td></tr>
+    <tr><td>2</td><td>bP4_DRV</td><td>RW</td><td>P4ポートの出力ドライブ能力選択。<br />0: ドライブ電流5mAレベル<br />1: ドライブ電流20mAレベル</td><td>0</td></tr>
+    <tr><td>1</td><td>P5.1</td><td>R0</td><td>P5.1ピン入力ステータスビットと制御可能な内蔵プルダウン抵抗</td><td>0</td></tr>
+    <tr><td>0</td><td>P5.0</td><td>R0</td><td>P5.0ピン入力ステータスビットと制御可能な内蔵プルダウン抵抗</td><td>0</td></tr>
 </table>
 
-## 10.4 GPIO Multiplexing and Mapping
+## 10.4 GPIOマルチプレックスとマッピング
 
-Some of the I / O pins of CH559 have alternate functions. After power-on, they are all general-purpose I / O pins. After different function modules are enabled, the corresponding pins are configured as the corresponding function pins of the respective function modules.
+CH559 の I/O 端子の一部には代替機能があります。電源投入後は、すべて汎用 I/O ピンです。異なる機能モジュールが有効になった後、対応するピンはそれぞれの機能モジュールの対応する機能ピンとして構成されます。
 
-
-### Pin function selection register (PIN_FUNC):
+### ピン機能選択レジスタ(PIN_FUNC):
 
 <table>
     <tr>
-        <th>Bit</th><th>Name</th><th>Access</th><th>Description</th><th>Reset value</th>
+        <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>bPWM1_PIN_X</td><td>RW</td><td>PWM1/PWM2 pin mapping enable bit, if this bit is 0, PWM1/2 uses P2.4/P2.5. If this bit is 1, PWM1/2 uses P4.3/P4.5</td><td>0</td></tr>
-    <tr><td>6</td><td>bTMR3_PIN_X</td><td>RW</td><td>PWM3/CAP3 pin mapping enable bit. When this bit is 0, PWM3/CAP3 uses P1.2. When this bit is 1, PWM3/CAP3 uses P4.2</td><td>0</td></tr>
-    <tr><td>5</td><td>bT2EX_PIN_X</td><td>RW</td><td>T2EX/CAP2 pin mapping enable bit. When this bit is 0, T2EX/CAP2 uses P1.1. When this bit is 1, T2EX/CAP2 uses P2.5</td><td>0</td></tr>
-    <tr><td>4</td><td>bUART0_PIN_X</td><td>RW</td><td>UART0 pin mapping enable bit. When this bit is 0, RXD0/TXD0 uses P3.0/P3.1. When this bit is 1, RXD0/TXD0 uses P0.2/P0.3.</td><td>0</td></tr>
-    <tr><td>3</td><td>bXBUS_EN</td><td>RW</td><td>xBUS external bus function enable bit, this bit is 0 to disable the external bus; this bit is 1 to enable the P0 port as an 8-bit data bus, and P3.6/P3.7 as write/read strobe control during bus access</td><td>0</td></tr>
-    <tr><td>2</td><td>bXBUS_CS_OE</td><td>RW</td><td>xBUS external bus chip select output enable bit. This bit is 0 to disable the output of chip select and can be decoded by external circuits. P3.4 is set as CS0 when this bit is 1 (XCS0 chip select 0, active low), and When ALE is disabled, the bus address A15 is inverted and output to P3.3 (equivalent to chip select 1, active low)</td><td>0</td></tr>
-    <tr><td>1</td><td>bXBUS_AH_OE</td><td>RW</td><td>xBUS External bus high 8-bit address output enable bit, this bit is 0 to disable output. When this bit is 1, during the MOVX_@DPTR instruction access to the external bus, the P2 port output bus address is the upper 8 bits</td><td>0</td></tr>
-    <tr><td>0</td><td>bXBUS_AL_OE</td><td>RW</td><td>The lower 8-bit address output enable bit of the xBUS external bus. When this bit is 0, it is a multiplexed address mode. When accessing the external bus, the lower 8 bits of the address are multiplexed with the data bus as required, and the external circuit is controlled by ALE to latch. If this bit is 1, it is the direct address mode.The lower 8-bit addresses A0~A7 are output through P4.0~P4.5 and P3.5 and P2.7.</td><td>0</td></tr>
+    <tr><td>7</td><td>bPWM1_PIN_X</td><td>RW</td><td>PWM1/PWM2ピンマッピングイネーブルビットです。<br />0: PWM1/2はP2.4/P2.5を使用<br />1: PWM1/2はP4.3/P4.5を使用<br /></td><td>0</td></tr>
+    <tr><td>6</td><td>bTMR3_PIN_X</td><td>RW</td><td>PWM3/CAP3ピンマッピングイネーブルビットです。<br />0: PWM3/CAP3はP1.2を使用<br />1: PWM3/CAP3はP4.2を使用</td><td>0</td></tr>
+    <tr><td>5</td><td>bT2EX_PIN_X</td><td>RW</td><td>T2EX/CAP2ピンマッピングイネーブルビットです。<br />0: T2EX/CAP2はP1.1を使用<br />1: T2EX/CAP2はP2.5を使用</td><td>0</td></tr>
+    <tr><td>4</td><td>bUART0_PIN_X</td><td>RW</td><td>UART0ピンマッピングイネーブルビットです。<br />0: RXD0/TXD0はP3.0/P3.1を使用<br />1: RXD0/TXD0はP0.2/P0.3を使用</td><td>0</td></tr>
+    <tr><td>3</td><td>bXBUS_EN</td><td>RW</td><td>xBUS外部バス機能イネーブルビット。<br />0: 外部バスを無効<br />1: P0ポートを8ビットのデータバスとして、P3.6/P3.7をバスアクセス時の書き込み/読み出しストローブ制御として有効にします。</td><td>0</td></tr>
+    <tr><td>2</td><td>bXBUS_CS_OE</td><td>RW</td><td>xBUS外部バスチップセレクト出力イネーブルビットです。<br />0: チップセレクトの出力を無効にし、外部回路でデコードすることができます。<br />1: P3.4がCS0に設定され(XCS0チップセレクト0, アクティブロー), ALEが無効の時はバスアドレスA15が反転してP3.3(チップセレクト1, アクティブローに相当)に出力されます。</td><td>0</td></tr>
+    <tr><td>1</td><td>bXBUS_AH_OE</td><td>RW</td><td>xBUS外部バスハイ 8 ビットアドレス出力イネーブルビット。<br />0: 出力を無効にします。<br />1: MOVX_@DPTR命令が外部バスにアクセスしている間は、出力を無効にします。P2ポートの出力バスアドレスは上位8ビットです。</td><td>0</td></tr>
+    <tr><td>0</td><td>bXBUS_AL_OE</td><td>RW</td><td>xBUS 外部バスの下位 8 ビットのアドレス出力イネーブルビットです。<br />0: 多重化されたアドレスモードです。外部バスへのアクセス時には必要に応じて下位8ビットのアドレスがデータバスと多重化され、外部回路はALEでラッチ制御されます。<br />1: ダイレクトアドレスモードです。下位8ビットのアドレスA0～A7はP4.0～P4.5、P3.5～P2.7を介して出力されます。</td><td>0</td></tr>
     
 </table>
 
 <div>
-    <p align="center">Figure 10.2.1 I/O pin equivalent schematic</p>
+    <p align="center">表10.2.1 I/Oピン等価回路図</p>
 </div>
 
 <table>
     <tr>
-        <th>GPIO</th><th>Other functions: in order of priority from left to right</th>
+        <th>GPIO</th><th>その他の機能 : 左から優先順位の高い順</th>
     </tr>
     <tr><td>P0[0]</td><td> AD0, UDTR/bUDTR, P0.0</td></tr>
     <tr><td>P0[1]</td><td> AD1, URTS/bURTS, P0.1</td></tr>
@@ -271,4 +269,5 @@ Some of the I / O pins of CH559 have alternate functions. After power-on, they a
     
 </table>
 
-The priority order from left to right described in the above table refers to the priority order when multiple functional modules compete to use the GPIO. For example, the P2 port has been set to the upper 8 bits of the output bus address. If only the A8~A11 addresses are actually used, then P2.4/P2.5 can still be used for higher priority PWM1/PWM2 functions, P2.6 It can still be used for RXD1 function, P2.7 can still be used for higher priority TXD1 or DA7 functions, so as to avoid wasting P2.4~P2.7 pins when A12~A15 address is not used.
+上表の左から順に記載されている優先順位は、複数の機能モジュールが競合して GPIO を使用する場合の優先順位を示しています。例えば、P2ポートは出力バスアドレスの上位8ビットに設定されています。
+実際にA8～A11アドレスのみを使用している場合は、A12～A15アドレスを使用していないときにP2.4～P2.7ピンを無駄にしないように、P2.4/P2.5はより優先度の高いPWM1/PWM2機能に、P2.6はRXD1機能に、P2.7はより優先度の高いTXD1やDA7機能に使用することができます。
