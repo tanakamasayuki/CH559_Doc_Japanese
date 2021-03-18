@@ -18,7 +18,7 @@ BookToC: false
     <tr><td>7</td><td>bUART0_TX</td><td>R0</td><td>UART0の送信状態を表示します。1は送信中を意味します。</td><td>0</td></tr>
     <tr><td>6</td><td>bUART0_RX</td><td>R0</td><td>UART0の受信状態を表示します。1は受信中を意味します。</td><td>0</td></tr>
     <tr><td>5</td><td>bSAFE_MOD_ACT</td><td>R0</td><td>セーフモードの状態を表示します。1は現在セーフモードであることを意味します。</td><td>0</td></tr>
-    <tr><td>4</td><td>bALE_CLK_EN</td><td>RW</td><td>ALEピンクロック出力イネーブル <br />1: xBUS動作がない時にALEがシステムの主周波数12、つまりFsys/12を出力します。<br />0: クロック信号の出力を無効にし、EMIを低減するために外部バス下位8ビットアドレスラッチ信号にアクセスするために必要な時だけ出力します。</td><td>0</td></tr>
+    <tr><td>4</td><td>bALE_CLK_EN</td><td>RW</td><td>ALEピンクロック出力許可 <br />1: xBUS動作がない時にALEがシステムの主周波数12、つまりFsys/12を出力します。<br />0: クロック信号の出力を無効にし、EMIを低減するために外部バス下位8ビットアドレスラッチ信号にアクセスするために必要な時だけ出力します。</td><td>0</td></tr>
     <tr><td>3</td><td>GF2</td><td>RW</td><td>一般フラグビット2。ユーザーは自分で定義することができます。ソフトウェアでクリアまたは設定できます。</td><td>0</td></tr>
     <tr><td>2</td><td>bDPTR_AUTO_INC</td><td>RW</td><td>MOVX_@DPTR命令が完了した後、DPTRをオートインクリメントすることを有効にする。</td><td>0</td></tr>
     <tr><td>1</td><td>reserved</td><td>R0</td><td>予約</td><td>0</td></tr>

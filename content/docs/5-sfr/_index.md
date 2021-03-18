@@ -91,10 +91,10 @@ CH559には、8051標準SFRの全レジスタが格納されています。そ�
     <tr><td>PLL_CFG</td><td>B2h</td><td>PLLクロック設定レジスタ</td><td>1101 1000b</td></tr>
     <tr><td>PCON</td><td>87h</td><td>電源制御レジスタ(パワーオンリセット状態)</td><td>0001 0000b</td></tr>
     <tr><td rowspan="5">割り込み制御レジスタ</td><td>IP_EX</td><td>E9h</td><td>拡張割り込み優先制御レジスタ</td><td>0000 0000b</td></tr>
-    <tr><td>IE_EX</td><td>E8h</td><td>拡張割り込みイネーブルレジスタ</td><td>0000 0000b</td></tr>
-    <tr><td>GPIO_IE</td><td>CFh</td><td>GPIO割り込みイネーブルレジスタ</td><td>0000 0000b</td></tr>
+    <tr><td>IE_EX</td><td>E8h</td><td>拡張割り込み許可レジスタ</td><td>0000 0000b</td></tr>
+    <tr><td>GPIO_IE</td><td>CFh</td><td>GPIO割り込み許可レジスタ</td><td>0000 0000b</td></tr>
     <tr><td>IP</td><td>B8h</td><td>割り込み優先制御レジスタ</td><td>0000 0000b</td></tr>
-    <tr><td>IE</td><td>A8h</td><td>割り込みイネーブルレジスタ</td><td>0000 0000b</td></tr>
+    <tr><td>IE</td><td>A8h</td><td>割り込み許可レジスタ</td><td>0000 0000b</td></tr>
     <tr><td rowspan="8">フラッシュROMレジスタ</td><td>ROM_DATA_H</td><td>8Fh</td><td>フラッシュROMデータレジスタ上位バイト</td><td>xxxx xxxxb</td></tr>
     <tr><td>ROM_DATA_L</td><td>8Eh</td><td>フラッシュROMデータレジスタ上位バイト</td><td>xxxx xxxxb</td></tr>
     <tr><td>ROM_DATA</td><td>8Eh</td><td>ROM_DATA_LとROM_DATA_Hで16ビットのSFR</td><td>xxxxh</td></tr>
@@ -109,20 +109,20 @@ CH559には、8051標準SFRの全レジスタが格納されています。そ�
     <tr><td>P4_CFG</td><td>C7h</td><td>P4ポート設定レジスタ</td><td>0000 0000b</td></tr>
     <tr><td>P5_IN</td><td>C7h</td><td>P5ポート入力レジスタ(読み取り専用)</td><td>0000 0000b</td></tr>
     <tr><td>PORT_CFG</td><td>C6h</td><td>ポート設定レジスタ</td><td>0000 1111b</td></tr>
-    <tr><td rowspan="2">P0_PU</td><td rowspan="2">C5h</td><td>P0ポートプルアップイネーブルレジスタ(En_P0_Pullup=0)</td><td>0000 0000b</td></tr>
-    <tr><td>P0ポートプルアップイネーブルレジスタ(En_P0_Pullup=1)</td><td>1111 1111b</td></tr>
+    <tr><td rowspan="2">P0_PU</td><td rowspan="2">C5h</td><td>P0ポートプルアップ許可レジスタ(En_P0_Pullup=0)</td><td>0000 0000b</td></tr>
+    <tr><td>P0ポートプルアップ許可レジスタ(En_P0_Pullup=1)</td><td>1111 1111b</td></tr>
     <tr><td>P0_DIR</td><td>C4h</td><td>P0ポート入出力制御レジスタ</td><td>0000 0000b</td></tr>
-    <tr><td>P4_PU</td><td>C3h</td><td>P4ポートプルアップイネーブルレジスタ</td><td>1111 1111b</td></tr>
+    <tr><td>P4_PU</td><td>C3h</td><td>P4ポートプルアップ許可レジスタ</td><td>1111 1111b</td></tr>
     <tr><td>P4_DIR</td><td>C2h</td><td>P4ポート入出力制御レジスタ</td><td>0000 0000b</td></tr>
     <tr><td>P4_IN</td><td>C1h</td><td>P4ポート入力レジスタ(読み取り専用)</td><td>1111 1111b</td></tr>
     <tr><td>P4_OUT</td><td>C0h</td><td>P4ポート出力レジスタ</td><td>0000 0000b</td></tr>
     <tr><td>P3_PU</td><td>BFh</td><td>P3ポート入出力制御レジスタ</td><td>1111 1111b</td></tr>
-    <tr><td>P3_DIR</td><td>BEh</td><td>P3ポートプルアップイネーブルレジスタ</td><td>0000 0000b</td></tr>
-    <tr><td>P2_PU</td><td>BDh</td><td>P2ポートプルアップイネーブルレジスタ</td><td>1111 1111b</td></tr>
+    <tr><td>P3_DIR</td><td>BEh</td><td>P3ポートプルアップ許可レジスタ</td><td>0000 0000b</td></tr>
+    <tr><td>P2_PU</td><td>BDh</td><td>P2ポートプルアップ許可レジスタ</td><td>1111 1111b</td></tr>
     <tr><td>P2_DIR</td><td>BCh</td><td>P2ポート入出力制御レジスタ</td><td>0000 0000b</td></tr>
-    <tr><td>P1_PU</td><td>BBh</td><td>P1ポートプルアップイネーブルレジスタ</td><td>1111 1111b</td></tr>
+    <tr><td>P1_PU</td><td>BBh</td><td>P1ポートプルアップ許可レジスタ</td><td>1111 1111b</td></tr>
     <tr><td>P1_DIR</td><td>BAh</td><td>P1ポート入出力制御レジスタ</td><td>0000 0000b</td></tr>
-    <tr><td>P1_IE</td><td>B9h</td><td>P1ポート入力イネーブルレジスタ</td><td>1111 1111b</td></tr>
+    <tr><td>P1_IE</td><td>B9h</td><td>P1ポート入力許可レジスタ</td><td>1111 1111b</td></tr>
     <tr><td>P3</td><td>B0h</td><td>P3ポート入出力レジスタ</td><td>1111 1111b</td></tr>
     <tr><td>P2</td><td>A0h</td><td>P2ポート入出力レジスタ</td><td>1111 1111b</td></tr>
     <tr><td>P1</td><td>90h</td><td>P1ポート入出力レジスタ</td><td>1111 1111b</td></tr>
@@ -191,7 +191,7 @@ CH559には、8051標準SFRの全レジスタが格納されています。そ�
     <tr><td>SER1_IIR</td><td>92h</td><td>UART1割り込み識別レジスタ(読み取り専用)</td><td>0000 0001b</td></tr>
     <tr><td>SER1_FCR</td><td>92h</td><td>FIFO制御レジスタ(書き込み専用)</td><td>0000 0000b</td></tr>
     <tr><td>SER1_DLM</td><td>91h</td><td>UART1ボーレート分周ラッチ上位バイト</td><td>1000 0000b</td></tr>
-    <tr><td>SER1_IER</td><td>91h</td><td>UART1割り込みイネーブルレジスタ</td><td>0000 0000b</td></tr>
+    <tr><td>SER1_IER</td><td>91h</td><td>UART1割り込み許可レジスタ</td><td>0000 0000b</td></tr>
     <tr><td rowspan="13">ADCレジスタ</td><td>ADC_EX_SW</td><td>F7h</td><td>ADC拡張アナログスイッチ制御レジスタ</td><td>0000 0000b</td></tr>
     <tr><td>ADC_SETUP</td><td>F6h</td><td>ADC設定レジスタ</td><td>0000 1000b</td></tr>
     <tr><td>ADC_FIFO_H</td><td>F5h</td><td>ADCのFIFO上位バイト(読み取り専用)</td><td>0000 0xxxb</td></tr>
@@ -213,7 +213,7 @@ CH559には、8051標準SFRの全レジスタが格納されています。そ�
     <tr><td>UDEV_CTRL</td><td>E4h</td><td>USBデバイスポート制御レジスタ</td><td>0100 x000b</td></tr>
     <tr><td>USB_DEV_AD</td><td>E3h</td><td>USBデバイスアドレスレジスタ</td><td>0000 0000b</td></tr>
     <tr><td>USB_CTRL</td><td>E2h</td><td>USB制御レジスタ</td><td>0000 0110b</td></tr>
-    <tr><td>USB_INT_EN</td><td>E1h</td><td>USB割り込みイネーブルレジスタ</td><td>0000 0000b</td></tr>
+    <tr><td>USB_INT_EN</td><td>E1h</td><td>USB割り込み許可レジスタ</td><td>0000 0000b</td></tr>
     <tr><td>UEP4_T_LEN</td><td>DFh</td><td>エンドポイント4送信サイズレジスタ</td><td>0xxx xxxxb</td></tr>
     <tr><td>UEP4_CTRL</td><td>DEh</td><td>エンドポイント4制御レジスタ</td><td>0000 0000b</td></tr>
     <tr><td>UEP0_T_LEN</td><td>DDh</td><td>エンドポイント0送信サイズレジスタ</td><td>0xxx xxxxb</td></tr>
@@ -403,10 +403,10 @@ DPLとDPHはxSFR, xBUS, xRAMデータメモリまたはプログラムメモリ�
     <tr><td>5</td><td>bBOOT_LOAD</td><td>RO</td><td><p>ブートローダステータスビットは、ISPブートローダの状態とアプリケーションの状態を区別するために使用します。
 電源投入時に設定され、ソフトウェアがリセットされると 0 にクリアされます。</p><p>ISPブートローダを搭載したチップの場合、本ビットが1の場合、ソフトウェアがリセットされていないことを示します。通常は、電源投入後に実行されたISPブートローダの状態です。このビットは0で、ソフトウェアがリセットされたことを示します。通常はアプリケーション状態</p></td><td>1</td></tr>
     <tr><td>4</td><td>bSW_RESET</td><td>RW</td><td>ソフトウェアリセット制御ビット: 1に設定するとソフトウェアリセットが行われます。ハードウェアオートゼロ</td><td>0</td></tr>
-    <tr><td>3</td><td>bCODE_WE</td><td>RW</td><td>フラッシュROM書き込みイネーブルビット。このビットは書き込み禁止の場合は0です。フラッシュROM書き込みや消去可能な場合は1</td><td>0</td></tr>
-    <tr><td>2</td><td>bDATA_WE</td><td>RW</td><td>フラッシュROMのデータフラッシュ領域書き込みイネーブルビットです。このビットは書き込み禁止の場合は0です。データフラッシュ領域の書き込みや消去可能な場合は1</td><td>0</td></tr>
+    <tr><td>3</td><td>bCODE_WE</td><td>RW</td><td>フラッシュROM書き込み許可ビット。このビットは書き込み禁止の場合は0です。フラッシュROM書き込みや消去可能な場合は1</td><td>0</td></tr>
+    <tr><td>2</td><td>bDATA_WE</td><td>RW</td><td>フラッシュROMのデータフラッシュ領域書き込み許可ビットです。このビットは書き込み禁止の場合は0です。データフラッシュ領域の書き込みや消去可能な場合は1</td><td>0</td></tr>
     <tr><td>1</td><td>bXIR_XSFR</td><td>RW</td><td><p>MOVX_@R0/R1命令アクセス範囲制御ビット:</p><p>本ビットは0で全てのxdata領域xRAM/xBUS/xSFRへのアクセスを許可します。</p><p>本ビットは1でxSFRへのアクセスを許可します、xRAM/xBUSへのアクセスはできません。</p></td><td>0</td></tr>
-    <tr><td>0</td><td>bWDOG_EN</td><td>RW</td><td>ウォッチドッグリセットイネーブルビット: 本ビットは0でウォッチドッグはタイマーとしてしか使われていません。このビットは1で、タイマーがオーバーフローしたときにウォッチドッグリセットを許可します。</td><td>0</td></tr>
+    <tr><td>0</td><td>bWDOG_EN</td><td>RW</td><td>ウォッチドッグリセット許可ビット: 本ビットは0でウォッチドッグはタイマーとしてしか使われていません。このビットは1で、タイマーがオーバーフローしたときにウォッチドッグリセットを許可します。</td><td>0</td></tr>
 </table>
 
 ### チップID(CHIP_ID):

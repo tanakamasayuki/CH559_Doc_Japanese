@@ -45,53 +45,53 @@ bLED_OUT_EN = 1の時はLED制御カード割り込み</td><td rowspan="14">高�
         <th>名前</th><th>アドレス</th><th>備考</th><th>リセット値</th>
     </tr>
     <tr><td>IP_EX</td><td>E9h</td><td>拡張割り込み優先制御レジスタ</td><td>00h</td></tr>
-    <tr><td>IE_EX</td><td>E8h</td><td>拡張割り込みイネーブルレジスタ</td><td>00h</td></tr>
-    <tr><td>GPIO_IE</td><td>CFh</td><td>GPIO割り込みイネーブルレジスタ</td><td>00h</td></tr>
+    <tr><td>IE_EX</td><td>E8h</td><td>拡張割り込み許可レジスタ</td><td>00h</td></tr>
+    <tr><td>GPIO_IE</td><td>CFh</td><td>GPIO割り込み許可レジスタ</td><td>00h</td></tr>
     <tr><td>IP</td><td>B8h</td><td>割り込み優先制御レジスタ</td><td>00h</td></tr>
-    <tr><td>IE</td><td>A8h</td><td>割り込みイネーブルレジスタ</td><td>00h</td></tr>
+    <tr><td>IE</td><td>A8h</td><td>割り込み許可レジスタ</td><td>00h</td></tr>
 </table>
 
-### 割り込みイネーブルレジスタ(IE):
+### 割り込み許可レジスタ(IE):
 
 <table>
     <tr>
         <th>ビット</th><th>名前</th><th>アクセス</th><th>備考</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>EA</td><td>RW</td><td>グローバル割り込みイネーブル制御ビット<br />1: E_DISは0で割り込みを有効にします。<br />0: 全ての割り込み要求をマスクします。</td><td>0</td></tr>
+    <tr><td>7</td><td>EA</td><td>RW</td><td>グローバル割り込み許可制御ビット<br />1: E_DISは0で割り込みを有効にします。<br />0: 全ての割り込み要求をマスクします。</td><td>0</td></tr>
     <tr><td>6</td><td>E_DIS</td><td>RW</td><td>グローバル割り込みディセーブル制御ビット<br />1: 全ての割り込み要求をマスクします。<br />0: EAは1で割り込みを有効にします。<br />このビットは通常、フラッシュROM操作中に一時的に割り込みを無効にするために使用されます。</td><td>0</td></tr>
-    <tr><td>5</td><td>ET2</td><td>RW</td><td>Timer2割り込みイネーブルビット<br />1: T2割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>4</td><td>ES</td><td>RW</td><td>UART0割り込みイネーブルビット<br />1: UART0の割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>3</td><td>ET1</td><td>RW</td><td>Timer1割り込みイネーブルビット<br />1: T1割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>2</td><td>EX1</td><td>RW</td><td>外部割込み1イネーブルビット<br />1: INT1割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>1</td><td>ET0</td><td>RW</td><td>Timer0割り込みイネーブルビット<br />1: T0割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>0</td><td>EX0</td><td>RW</td><td>外部割込み0、LED制御カード割込みイネーブルビット<br />1: bLED_OUT_ENで選択されたINT0/LED割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>5</td><td>ET2</td><td>RW</td><td>Timer2割り込み許可ビット<br />1: T2割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>4</td><td>ES</td><td>RW</td><td>UART0割り込み許可ビット<br />1: UART0の割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>3</td><td>ET1</td><td>RW</td><td>Timer1割り込み許可ビット<br />1: T1割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>2</td><td>EX1</td><td>RW</td><td>外部割込み1許可ビット<br />1: INT1割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>1</td><td>ET0</td><td>RW</td><td>Timer0割り込み許可ビット<br />1: T0割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>0</td><td>EX0</td><td>RW</td><td>外部割込み0、LED制御カード割込み許可ビット<br />1: bLED_OUT_ENで選択されたINT0/LED割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
     
 </table>
 
-### 拡張割り込みイネーブルレジスタ(IE_EX):
+### 拡張割り込み許可レジスタ(IE_EX):
 
 <table>
     <tr>
         <th>ビット</th><th>名前</th><th>アクセス</th><th>備考</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>IE_WDOG</td><td>RW</td><td>ウォッチドッグタイマ割り込みイネーブルビット<br />1: WDOG割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>6</td><td>IE_GPIO</td><td>RW</td><td>GPIO割り込みイネーブルビット<br />1: GPIO_IEで有効な割り込みを有効にします。<br />0: GPIO_IEのすべての割り込みをマスクします。</td><td>0</td></tr>
-    <tr><td>5</td><td>IE_PWM1</td><td>RW</td><td>PWM1割り込みイネーブルビット<br />1: PWM1割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>4</td><td>IE_UART1</td><td>RW</td><td>UART1の割り込みイネーブルビット<br />1: UART1の割り込みを有効にします。<br />0: マスク</td><td>0</td></tr>
-    <tr><td>3</td><td>IE_ADC</td><td>RW</td><td>ADC割り込みイネーブルビット<br />1: ADC割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>2</td><td>IE_USB</td><td>RW</td><td>USB割り込みイネーブルビット<br />1: USB割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>1</td><td>IE_TMR3</td><td>RW</td><td>Timer3割り込みイネーブルビット<br />1: Timer3の割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
-    <tr><td>0</td><td>IE_SPI0</td><td>RW</td><td>SPI0割り込みイネーブルビット<br />1: SPI0割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>7</td><td>IE_WDOG</td><td>RW</td><td>ウォッチドッグタイマ割り込み許可ビット<br />1: WDOG割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>6</td><td>IE_GPIO</td><td>RW</td><td>GPIO割り込み許可ビット<br />1: GPIO_IEで有効な割り込みを有効にします。<br />0: GPIO_IEのすべての割り込みをマスクします。</td><td>0</td></tr>
+    <tr><td>5</td><td>IE_PWM1</td><td>RW</td><td>PWM1割り込み許可ビット<br />1: PWM1割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>4</td><td>IE_UART1</td><td>RW</td><td>UART1の割り込み許可ビット<br />1: UART1の割り込みを有効にします。<br />0: マスク</td><td>0</td></tr>
+    <tr><td>3</td><td>IE_ADC</td><td>RW</td><td>ADC割り込み許可ビット<br />1: ADC割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>2</td><td>IE_USB</td><td>RW</td><td>USB割り込み許可ビット<br />1: USB割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>1</td><td>IE_TMR3</td><td>RW</td><td>Timer3割り込み許可ビット<br />1: Timer3の割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
+    <tr><td>0</td><td>IE_SPI0</td><td>RW</td><td>SPI0割り込み許可ビット<br />1: SPI0割り込みを有効にします。<br />0: マスク。</td><td>0</td></tr>
     
 </table>
 
-### GPIO割り込みイネーブルレジスタ(GPIO_IE):
+### GPIO割り込み許可レジスタ(GPIO_IE):
 
 <table>
     <tr>
         <th>ビット</th><th>名前</th><th>アクセス</th><th>備考</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>bIE_IO_EDGE</td><td>RW</td><td>GPIO エッジ割り込みモードイネーブル:<br /><br />本ビットは0でレベル割り込みモードを選択します。GPIOピン入力が有効レベルの場合、bIO_INT_ACTが1で、常に割り込み要求を行います。GPIO入力が無効レベルの場合は、bIO_INT_ACTが0で割り込み要求をキャンセルします。<br /><br />本ビットは1でエッジ割り込みモードを選択します。GPIO端子に有効なエッジが入力されると、割り込みフラグbIO_INT_ACTが発生して割り込み要求を行います。この割り込みフラグはソフトウェアではクリアできません。レベル割込みモードでリセットするか、対応する割込みサービスルーチンに入るしかありません。</td><td>0</td></tr>
+    <tr><td>7</td><td>bIE_IO_EDGE</td><td>RW</td><td>GPIO エッジ割り込みモード許可:<br /><br />本ビットは0でレベル割り込みモードを選択します。GPIOピン入力が有効レベルの場合、bIO_INT_ACTが1で、常に割り込み要求を行います。GPIO入力が無効レベルの場合は、bIO_INT_ACTが0で割り込み要求をキャンセルします。<br /><br />本ビットは1でエッジ割り込みモードを選択します。GPIO端子に有効なエッジが入力されると、割り込みフラグbIO_INT_ACTが発生して割り込み要求を行います。この割り込みフラグはソフトウェアではクリアできません。レベル割込みモードでリセットするか、対応する割込みサービスルーチンに入るしかありません。</td><td>0</td></tr>
     <tr><td>6</td><td>bIE_RXD1_LO</td><td>RW</td><td>本ビットは 1 で UART1 の受信ピン割り込みを有効にします（レベルモードはアクティブロー、エッジモードは立下りエッジ）。<br />このビットを0にすると無効になります。<br />iRS485モードではXA/XB差動入力を選択し、非iRS485モードではbIER_PIN_MOD1 = 1/0でRXD1またはRXD1_端子を選択します。</td><td>0</td></tr>
     <tr><td>5</td><td>bIE_P5_5_HI</td><td>RW</td><td>本ビットは1で、P5.5割り込み（レベルモードはアクティブHigh、エッジモードは立上りエッジ）を有効にします。<br />無効にするには、このビットを0にします。</td><td>0</td></tr>
     <tr><td>4</td><td>bIE_P1_4_LO</td><td>RW</td><td>本ビットは1で、P1.4割り込み（レベルモードはアクティブLow、エッジモードは立下りエッジでアクティブ）を有効にします。<br />無効にするには、このビットを0にします。</td><td>0</td></tr>

@@ -51,11 +51,11 @@ Timer0/1は2つの16ビットタイマ/カウンタです。TCONとTMODは、Tim
     <tr>
         <th>ビット</th><th>名前</th><th>アクセス</th><th>概要</th><th>リセット値</th>
     </tr>
-    <tr><td>7 </td><td>bT1_GATE</td><td> RW</td><td>ゲートイネーブルビットは、タイマ1の起動が外部割込み信号INT1の影響を受けるかどうかを制御します。<br />0: Timer/Counter1が起動するかどうかはINT1とは関係ありません。<br />1: INT1ピンがHIGHでTR1が1の時にのみ起動できます。</td><td> 0</td></tr>
+    <tr><td>7 </td><td>bT1_GATE</td><td> RW</td><td>ゲート許可ビットは、タイマ1の起動が外部割込み信号INT1の影響を受けるかどうかを制御します。<br />0: Timer/Counter1が起動するかどうかはINT1とは関係ありません。<br />1: INT1ピンがHIGHでTR1が1の時にのみ起動できます。</td><td> 0</td></tr>
     <tr><td>6 </td><td>bT1_CT</td><td> RW </td><td>タイミングモードまたはカウントモード選択ビットです。T1ピンの立ち下がりエッジをクロックとし、カウントモードで動作する場合は1となります。</td><td>0</td></tr>
     <tr><td>5 </td><td>bT1_M1</td><td> RW </td><td>Timer/Counter1モード選択上位</td><td> 0</td></tr>
     <tr><td>4 </td><td>bT1_M0</td><td> RW </td><td>Timer/Counter1モード選択下位</td><td> 0</td></tr>
-    <tr><td>3 </td><td>bT0_GATE</td><td>RW </td><td>ゲーティングイネーブルビットは、Timer0の起動が外部割込み信号INT0の影響を受けるかどうかを制御します。<br />0: INT0に関係なくTimer/Counter0が起動します。<br />1: INT0ピンのみがHIGHになり、TR0を起動することができます。</td><td>0</td></tr>
+    <tr><td>3 </td><td>bT0_GATE</td><td>RW </td><td>ゲーティング許可ビットは、Timer0の起動が外部割込み信号INT0の影響を受けるかどうかを制御します。<br />0: INT0に関係なくTimer/Counter0が起動します。<br />1: INT0ピンのみがHIGHになり、TR0を起動することができます。</td><td>0</td></tr>
     <tr><td>2 </td><td>bT0_CT </td><td>RW </td><td>タイミングモードまたはカウントモード選択ビット。<br />0: タイミングモードになります。<br />1: T0ピンの立ち下がりエッジをクロックとして使用し、カウントモードで動作します。</td><td>0</td></tr>
     <tr><td>1 </td><td>bT0_M1 </td><td>RW </td><td>Timer/Counter0モード選択上位</td><td> 0</td></tr>
     <tr><td>0 </td><td>bT0_M0 </td><td>RW </td><td>Timer/Counter0モード選択下位</td><td> 0</td></tr>
@@ -135,7 +135,7 @@ Timer2は16ビットのオートリロードTimer/Counterです。T2CON, T2MOD�
     <tr><td>6</td><td>EXF2 </td><td>RW</td><td>Timer2外部トリガフラグです。EXEN2 = 1の時、T2EX有効エッジトリガで設定される。ソフトウェアでクリアする必要があります。</td><td> 0</td></tr>
     <tr><td>5</td><td>RCLK </td><td>RW</td><td>UART0の受信クロックを選択します。<br />0: Timer1のオーバーフローで発生するボーレートを選択します。<br />1: Timer2のオーバーフローで発生するボーレートを選択します。</td><td> 0</td></tr>
     <tr><td>4</td><td>TCLK </td><td>RW</td><td>UART0の送信クロックを選択します。<br />0: Timer1のオーバーフローで発生するボーレートを選択します。<br />1: Timer2のオーバーフローで発生するボーレートを選択します。</td><td> 0</td></tr>
-    <tr><td>3</td><td>EXEN2</td><td>RW</td><td>T2EXトリガイネーブルビット<br />0: T2EXを無視します。<br />1: T2EXエッジでのリロードまたはキャプチャのトリガを有効にします。</td><td> 0</td></tr>
+    <tr><td>3</td><td>EXEN2</td><td>RW</td><td>T2EXトリガ許可ビット<br />0: T2EXを無視します。<br />1: T2EXエッジでのリロードまたはキャプチャのトリガを有効にします。</td><td> 0</td></tr>
     <tr><td>2 </td><td>TR2 </td><td>RW</td><td>Timer2のスタート/ストップビットです。1に設定して開始します。ソフトで設定、解除が必要。</td><td> 0</td></tr>
     <tr><td>1 </td><td>C_T2</td><td>RW</td><td>Timer2クロックソース選択ビット<br />0: 内部クロックを使用します。<br />1: T2ピンの立下りエッジに基づくエッジカウントを使用します。</td><td> 0</td></tr>
     <tr><td>0</td><td>CP_RL2</td><td>RW</td><td>Timer2機能選択ビットです。RCLKまたはTCLKが1の場合、本ビットは強制的に0になります。<br />0: Timer2はTimer/Counterとして使用され、カウンタがオーバーフローした時やT2EXレベルが変化した時に自動的に初期カウント値をリロードします。<br />1: Timer2のキャプチャ2機能を有効にし、T2EXの有効エッジをキャプチャします。</td><td> 0</td></tr>
@@ -147,13 +147,13 @@ Timer2は16ビットのオートリロードTimer/Counterです。T2CON, T2MOD�
     <tr>
         <th>ビット</th><th>名前</th><th>アクセス</th><th colspan="2">概要</th><th>リセット値</th>
     </tr>
-    <tr><td>7</td><td>bTMR_CLK</td><td>RW</td><td colspan="2">高速クロックのT0/T1/T2タイマの高速クロックモードイネーブルが選択されています。<br />1: 周波数分割のないシステムクロックFsysがカウントクロックとして使用されます。<br />0: 分周クロックが使用されます。<br />このビットは、標準クロックを選択するタイマには影響しません。</td><td>0</td></tr>
+    <tr><td>7</td><td>bTMR_CLK</td><td>RW</td><td colspan="2">高速クロックのT0/T1/T2タイマの高速クロックモード許可が選択されています。<br />1: 周波数分割のないシステムクロックFsysがカウントクロックとして使用されます。<br />0: 分周クロックが使用されます。<br />このビットは、標準クロックを選択するタイマには影響しません。</td><td>0</td></tr>
     <tr><td>6</td><td>bT2_CLK</td><td>RW</td><td colspan="2">Timer2内部クロック周波数選択ビットです。<br />0: 標準クロックを選択します。タイミング/カウントモードはFsys/12です。UART0のクロックモードはFsys/4です。<br />1: 高速クロックを選択します。(bTMR_CLK = 0)またはFsys(bTMR_CLK = 1)を選択します。UART0のクロックモードはFsys/2(bTMR_CLK = 0)またはFsys(bTMR_CLK = 1)です。</td><td>0</td></tr>
     <tr><td>5</td><td>bT1_CLK</td><td>RW</td><td colspan="2">Timer1の内部クロック周波数選択ビットです。<br />0: 標準クロックFsys/12を選択します。<br />1: 高速クロックFsys/4(bTMR_CLK = 0)またはFsys(bTMR_CLK = 1)を選択します。</td><td>0</td></tr>
     <tr><td>4</td><td>bT0_CLK</td><td>RW</td><td colspan="2">Timer0内部クロック周波数選択ビットです。<br />0: 標準クロックFsys/12です。<br />1: 高速クロックFsys/4(bTMR_CLK = 0)またはFsys(bTMR_CLK = 1)です。</td><td>0</td></tr>
     <tr><td>3</td><td>bT2_CAP_M1</td><td>RW</td><td>Timer2キャプチャモード上位</td><td rowspan="2"><p>キャプチャモードの選択:<br />X0: 立下りエッジから立下りエッジ<br />01: 任意のエッジから任意のエッジ、つまりレベル変化<br />11: 立上がりエッジから立上がりエッジ</td><td>0</td></tr>
     <tr><td>2</td><td>bT2_CAP_M0</td><td>RW</td><td>Timer2キャプチャモード下位</td><td>0</td></tr>
-    <tr><td>1</td><td>T2OE</td><td>RW</td><td colspan="2">Timer2クロック出力イネーブルビット<br />0: 出力を無効にします。<br />1: T2ピンの出力クロックを有効にします。周波数はTimer2のオーバーフローレートの半分です。</td><td>0</td></tr>
+    <tr><td>1</td><td>T2OE</td><td>RW</td><td colspan="2">Timer2クロック出力許可ビット<br />0: 出力を無効にします。<br />1: T2ピンの出力クロックを有効にします。周波数はTimer2のオーバーフローレートの半分です。</td><td>0</td></tr>
     <tr><td>0</td><td>bT2_CAP1_EN</td><td>RW</td><td colspan="2">キャプチャ1モードは、RCLK = 0、TCLK = 0、CP_RL2 = 1、C_T2 = 0、T2OE = 0 のときに有効になります。<br />1: T2の有効エッジをキャプチャするためのキャプチャ1機能を有効にします。<br />0: キャプチャ1を無効にする。</td><td>0</td></tr>
 </table>
 
@@ -412,7 +412,7 @@ PWM2出力のデューティサイクル = PWM_DATA2 / PWM_CYCLE。値が0%か�
     <tr><td>6</td><td>bMFM_BUF_EMPTY</td><td>R0</td><td>1: bPWM_MOD_MFM = 1の場合、MFMバッファが空であることを示します</td><td>0</td></tr>
     <tr><td>5</td><td>bPWM_POLAR</td><td>RW</td><td>PWM1出力の極性を制御します。<br />0: デフォルトLOW、アクティブHIGH<br />1: デフォルトHIGH、アクティブLOW</td><td>0</td></tr>
     <tr><td>4</td><td>bPWM_IF_END</td><td>RW</td><td>PWMサイクル終了割り込みフラグビット<br />1: 割り込みが発生していることを示します。1の書き込みでクリア、またはPWM_CYCLEの書き込みでクリア、またはデータのリロード時にクリア</td><td>0</td></tr>
-    <tr><td>3</td><td>bPWM_OUT_EN</td><td>RW</td><td>PWM1出力イネーブルです。<br />1: PWM1出力を有効にします。</td><td>0</td></tr>
+    <tr><td>3</td><td>bPWM_OUT_EN</td><td>RW</td><td>PWM1出力許可です。<br />1: PWM1出力を有効にします。</td><td>0</td></tr>
     <tr><td>2</td><td>bPWM2_OUT_EN</td><td>RW</td><td>1: bPWM_MOD_MFM = 0のとき。PWM2出力を有効にします。</td><td>0</td></tr>
     <tr><td>2</td><td>bMFM_BIT_CNT2</td><td>R0</td><td>bPWM_MOD_MFM = 1の場合、現在のMFMエンコードの進行状況を示します。<br />0: 下位4ビットが処理中であることを示します。<br />1: 上位4ビットが処理中であることを示します。</td><td>0</td></tr>
     <tr><td>1</td><td>bPWM_CLR_ALL</td><td>RW</td><td>1: PWM1とPWM2のカウントとFIFOをクリアするためのもので、ソフトウェアでクリアする必要があります。</td><td>1</td></tr>
@@ -540,7 +540,7 @@ Timer2デュアルチャネルキャプチャモード:
 
 1. T3_SETUPのビットbT3_EN_CK_SEを1に設定し、Timer3のクロック分周設定レジスタT3_CK_SEを有効にして分周係数を設定し、クロックをFsys / T3_CK_SEにカウントします。設定完了後、T._EN_CK_SEをクリアします。
 2. T3_ENDのカウント終了値またはPWMの総回数を設定します。
-3. 必要に応じてT3_SETUPで割り込みイネーブルをONにします。
+3. 必要に応じてT3_SETUPで割り込み許可をONにします。
 4. T3_CTRLに各制御ビットをセットしてモードを選択し、bT3_CLR_ALLをクリアし、bT3_CNT_ENをセットしてTimer3をスタートさせる。
 5. 必要に応じてT3_DMA_ALとT3_DMA_AHとT3_DMA_CNを設定し、bT3_DMA_ENを設定してDMA機能を有効にする。
 
